@@ -44,10 +44,10 @@ The project implements a modular, synthesizable AES-128 encryption engine with A
  │                            │
  │      SEC-DED ECC           │
  │                            │
- │ DATA_WIDTH  = 128         │
- │ PARITY_BITS = 8           │
- │ ECC_WIDTH   = 137         │
- │ DEPTH       = 16          │
+ │ DATA_WIDTH  = 128          │
+ │ PARITY_BITS = 8            │
+ │ ECC_WIDTH   = 137          │
+ │ DEPTH       = 16           │
  └──────────────┬─────────────┘
                 │
                 │ 128-bit plaintext
