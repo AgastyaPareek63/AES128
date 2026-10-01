@@ -25,24 +25,50 @@ The project implements a modular, synthesizable AES-128 encryption engine with A
 ## Architecture
 
 ```text
-             Zynq PS
+                              AES-128 AXI FIFO
+                        │
+          ┌─────────────┴─────────────┐
+          │                           │
+          ▼                           ▼
+     AXI4-Lite                    FIFO Control
+     Registers
+          │
+          ▼
+     Plaintext 128-bit
+     Key 128-bit
+     START
+          │
+          ▼
+ ┌────────────────────────────┐
+ │      128-bit FIFO          │
+ │                            │
+ │      SEC-DED ECC           │
+ │                            │
+ │ DATA_WIDTH  = 128         │
+ │ PARITY_BITS = 8           │
+ │ ECC_WIDTH   = 137         │
+ │ DEPTH       = 16          │
+ └──────────────┬─────────────┘
                 │
-             AXI4-Lite
-                │
-         ┌──────▼──────┐
-         │ SmartConnect│
-         └──────┬──────┘
-                │
-       ┌────────┴─────────┐
-       │                  │
-       ▼                  ▼
- AES-128 AXI FIFO     AXI BRAM Controller
-       │                  │
-       ▼                  ▼
-  SEC-DED FIFO       Shared BRAM
-       │
-       ▼
- AES-128 Encryption
-       │
-       ▼
-   Ciphertext
+                │ 128-bit plaintext
+                ▼
+       ┌────────────────────┐
+       │   AES-128 Core     │
+       │                    │
+       │ Key Expansion      │
+       │        ↓           │
+       │ AddRoundKey        │
+       │        ↓           │
+       │ Round 1            │
+       │        ↓           │
+       │ Round 2            │
+       │        ↓           │
+       │    ...             │
+       │        ↓           │
+       │ Round 9            │
+       │        ↓           │
+       │ Final Round 10     │
+       └─────────┬──────────┘
+                 │
+                 ▼
+          128-bit ciphertext
