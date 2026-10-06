@@ -94,7 +94,7 @@ module aes_mix_columns (
     wire [7:0] c3_2 = b12 ^ b13 ^ xtime(b14) ^ mul3(b15);
 
     wire [7:0] c3_3 = mul3(b12) ^ b13 ^ b14 ^ xtime(b15);
-
+            
     // Output
 
     assign state_out = {
