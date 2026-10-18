@@ -1,0 +1,1016 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date              : Wed Oct 14 14:58:48 2026
+| Host              : AgastyaLegion running 64-bit major release  (build 9200)
+| Command           : report_timing -from [get_cells -hier -filter {NAME =~ *key_reg_reg*}] -to [get_cells -hier -filter {NAME =~ *state_reg_reg*}] -max_paths 5 -path_type full -file C:/Vivado_Projects/AES128_ENC/critical_paths.txt
+| Design            : aes_system_wrapper
+| Device            : xczu7ev-ffvc1156
+| Speed File        : -2  PRODUCTION 1.30 05-15-2022
+| Design State      : Routed
+| Temperature Grade : E
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -3.486ns  (required time - arrival time)
+  Source:                 aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][25]/C
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[13]/D
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_pl_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_pl_0 rise@10.000ns - clk_pl_0 rise@0.000ns)
+  Data Path Delay:        13.244ns  (logic 3.511ns (26.510%)  route 9.733ns (73.490%))
+  Logic Levels:           50  (LUT2=4 LUT3=4 LUT4=5 LUT5=3 LUT6=18 MUXF7=8 MUXF8=8)
+  Clock Path Skew:        -0.137ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.830ns = ( 11.830 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.127ns
+    Clock Pessimism Removal (CPR):    0.160ns
+  Clock Uncertainty:      0.130ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.250ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_pl_0 rise edge)
+                                                      0.000     0.000 r  
+                         propagated clock network latency
+                                                      2.127     2.127    
+    SLICE_X71Y150        FDRE                         0.000     2.127 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][25]/C
+    SLICE_X71Y150        FDRE (Prop_AFF_SLICEM_C_Q)
+                                                      0.077     2.204 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][25]/Q
+                         net (fo=36, routed)          0.266     2.470    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/Q[25]
+    SLICE_X70Y153        LUT6 (Prop_C6LUT_SLICEM_I1_O)
+                                                      0.145     2.615 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b7/O
+                         net (fo=1, routed)           0.021     2.636    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/g0_b0__9_i_26_1
+    SLICE_X70Y153        MUXF7 (Prop_F7MUX_CD_SLICEM_I1_O)
+                                                      0.061     2.697 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/g0_b0__9_i_28/O
+                         net (fo=1, routed)           0.000     2.697    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/g0_b0__9_i_28_n_0
+    SLICE_X70Y153        MUXF8 (Prop_F8MUX_BOT_SLICEM_I0_O)
+                                                      0.030     2.727 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/g0_b0__9_i_26/O
+                         net (fo=15, routed)          0.328     3.055    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/sub_word_return[7]
+    SLICE_X67Y153        LUT5 (Prop_E6LUT_SLICEM_I3_O)
+                                                      0.100     3.155 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__9_i_13/O
+                         net (fo=17, routed)          0.560     3.715    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[72]_i_6
+    SLICE_X65Y151        MUXF8 (Prop_F8MUX_BOT_SLICEL_S_O)
+                                                      0.069     3.784 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__4/g0_b0__9_i_8/O
+                         net (fo=13, routed)          0.305     4.089    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_62
+    SLICE_X63Y155        LUT3 (Prop_B6LUT_SLICEM_I2_O)
+                                                      0.037     4.126 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__9_i_2/O
+                         net (fo=34, routed)          0.296     4.422    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__9_i_2_n_0
+    SLICE_X62Y158        LUT6 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.148     4.570 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b4__9/O
+                         net (fo=1, routed)           0.011     4.581    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__9/g0_b0__14_i_19_0
+    SLICE_X62Y158        MUXF7 (Prop_F7MUX_EF_SLICEL_I0_O)
+                                                      0.057     4.638 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__9/g0_b0__14_i_32/O
+                         net (fo=1, routed)           0.000     4.638    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__9/g0_b0__14_i_32_n_0
+    SLICE_X62Y158        MUXF8 (Prop_F8MUX_TOP_SLICEL_I1_O)
+                                                      0.026     4.664 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__9/g0_b0__14_i_19/O
+                         net (fo=8, routed)           0.348     5.011    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_116
+    SLICE_X61Y159        LUT4 (Prop_A6LUT_SLICEM_I2_O)
+                                                      0.053     5.064 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__14_i_11/O
+                         net (fo=5, routed)           0.105     5.169    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[84]
+    SLICE_X61Y160        LUT2 (Prop_E6LUT_SLICEM_I1_O)
+                                                      0.052     5.221 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__14_i_5/O
+                         net (fo=33, routed)          0.552     5.774    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[20]
+    SLICE_X65Y162        LUT6 (Prop_E6LUT_SLICEL_I4_O)
+                                                      0.099     5.873 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b4__14/O
+                         net (fo=1, routed)           0.007     5.880    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__14/g0_b0__15_i_21_3
+    SLICE_X65Y162        MUXF7 (Prop_F7MUX_EF_SLICEL_I1_O)
+                                                      0.056     5.936 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__14/g0_b0__15_i_33/O
+                         net (fo=1, routed)           0.000     5.936    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__14/g0_b0__15_i_33_n_0
+    SLICE_X65Y162        MUXF8 (Prop_F8MUX_TOP_SLICEL_I1_O)
+                                                      0.026     5.962 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__14/g0_b0__15_i_21/O
+                         net (fo=5, routed)           0.136     6.098    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_174
+    SLICE_X65Y164        LUT5 (Prop_F6LUT_SLICEL_I2_O)
+                                                      0.035     6.133 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__15_i_12/O
+                         net (fo=4, routed)           0.475     6.607    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_6_in[124]
+    SLICE_X69Y164        LUT3 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.049     6.656 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__15_i_5/O
+                         net (fo=34, routed)          0.254     6.910    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_6_in[28]
+    SLICE_X71Y162        LUT6 (Prop_G6LUT_SLICEM_I4_O)
+                                                      0.123     7.033 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b3__15/O
+                         net (fo=1, routed)           0.017     7.050    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__15/g0_b0__20_i_10_3
+    SLICE_X71Y162        MUXF7 (Prop_F7MUX_GH_SLICEM_I1_O)
+                                                      0.060     7.110 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__15/g0_b0__20_i_20/O
+                         net (fo=1, routed)           0.000     7.110    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__15/g0_b0__20_i_20_n_0
+    SLICE_X71Y162        MUXF8 (Prop_F8MUX_TOP_SLICEM_I0_O)
+                                                      0.028     7.138 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__15/g0_b0__20_i_10/O
+                         net (fo=5, routed)           0.248     7.386    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_188
+    SLICE_X70Y161        LUT2 (Prop_E6LUT_SLICEM_I0_O)
+                                                      0.037     7.423 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__20_i_4/O
+                         net (fo=36, routed)          0.313     7.736    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_5_in[3]
+    SLICE_X68Y160        LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.148     7.884 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b3__20/O
+                         net (fo=1, routed)           0.011     7.895    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__20/g0_b0__25_i_36_2
+    SLICE_X68Y160        MUXF7 (Prop_F7MUX_EF_SLICEL_I0_O)
+                                                      0.057     7.952 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__20/g0_b0__25_i_46/O
+                         net (fo=1, routed)           0.000     7.952    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__20/g0_b0__25_i_46_n_0
+    SLICE_X68Y160        MUXF8 (Prop_F8MUX_TOP_SLICEL_I1_O)
+                                                      0.026     7.978 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__20/g0_b0__25_i_36/O
+                         net (fo=3, routed)           0.226     8.203    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_237
+    SLICE_X66Y161        LUT6 (Prop_E6LUT_SLICEL_I3_O)
+                                                      0.035     8.238 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__25_i_24/O
+                         net (fo=4, routed)           0.368     8.606    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_4_in[107]
+    SLICE_X63Y161        LUT3 (Prop_B6LUT_SLICEM_I2_O)
+                                                      0.052     8.658 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__25_i_12/O
+                         net (fo=5, routed)           0.109     8.767    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__25_i_12_n_0
+    SLICE_X63Y163        LUT3 (Prop_E5LUT_SLICEM_I1_O)
+                                                      0.139     8.906 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__25_i_4/O
+                         net (fo=33, routed)          0.374     9.281    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__25_i_4_n_0
+    SLICE_X60Y163        LUT6 (Prop_B6LUT_SLICEL_I3_O)
+                                                      0.148     9.429 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b5__25/O
+                         net (fo=1, routed)           0.009     9.438    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__25/g0_b0__34_i_54_2
+    SLICE_X60Y163        MUXF7 (Prop_F7MUX_AB_SLICEL_I0_O)
+                                                      0.056     9.494 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__25/g0_b0__34_i_73/O
+                         net (fo=1, routed)           0.000     9.494    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__25/g0_b0__34_i_73_n_0
+    SLICE_X60Y163        MUXF8 (Prop_F8MUX_BOT_SLICEL_I1_O)
+                                                      0.026     9.520 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__25/g0_b0__34_i_54/O
+                         net (fo=3, routed)           0.257     9.777    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_281
+    SLICE_X56Y164        LUT4 (Prop_G6LUT_SLICEM_I3_O)
+                                                      0.052     9.829 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_38/O
+                         net (fo=2, routed)           0.088     9.917    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_38_n_0
+    SLICE_X56Y164        LUT5 (Prop_F6LUT_SLICEM_I4_O)
+                                                      0.088    10.005 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__30_i_18/O
+                         net (fo=2, routed)           0.046    10.051    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[117]
+    SLICE_X56Y164        LUT4 (Prop_H6LUT_SLICEM_I3_O)
+                                                      0.039    10.090 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__30_i_12/O
+                         net (fo=5, routed)           0.237    10.326    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[85]
+    SLICE_X59Y170        LUT2 (Prop_H6LUT_SLICEL_I1_O)
+                                                      0.036    10.362 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__30_i_6/O
+                         net (fo=34, routed)          0.462    10.825    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[21]
+    SLICE_X63Y172        LUT6 (Prop_C6LUT_SLICEM_I5_O)
+                                                      0.123    10.948 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b2__30/O
+                         net (fo=1, routed)           0.021    10.969    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__30/g0_b0__35_i_32_1
+    SLICE_X63Y172        MUXF7 (Prop_F7MUX_CD_SLICEM_I1_O)
+                                                      0.061    11.030 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__30/g0_b0__35_i_70/O
+                         net (fo=1, routed)           0.000    11.030    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__30/g0_b0__35_i_70_n_0
+    SLICE_X63Y172        MUXF8 (Prop_F8MUX_BOT_SLICEM_I0_O)
+                                                      0.030    11.060 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__30/g0_b0__35_i_32/O
+                         net (fo=2, routed)           0.266    11.326    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_485
+    SLICE_X64Y172        LUT2 (Prop_A6LUT_SLICEM_I1_O)
+                                                      0.125    11.451 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__31_i_25/O
+                         net (fo=3, routed)           0.430    11.881    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__31_i_25_n_0
+    SLICE_X66Y172        LUT6 (Prop_H6LUT_SLICEL_I5_O)
+                                                      0.051    11.932 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__31_i_11/O
+                         net (fo=4, routed)           0.138    12.070    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__31_i_11_n_0
+    SLICE_X67Y171        LUT4 (Prop_E6LUT_SLICEM_I3_O)
+                                                      0.052    12.122 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__31_i_3/O
+                         net (fo=34, routed)          0.429    12.551    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_2_in[26]
+    SLICE_X76Y172        LUT6 (Prop_A6LUT_SLICEL_I2_O)
+                                                      0.090    12.641 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b1__31/O
+                         net (fo=1, routed)           0.141    12.782    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/g0_b0__36_i_12_1
+    SLICE_X77Y171        LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.123    12.905 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__31/g0_b0__36_i_38/O
+                         net (fo=4, routed)           0.089    12.994    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_311
+    SLICE_X76Y171        LUT6 (Prop_G6LUT_SLICEL_I2_O)
+                                                      0.035    13.029 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_12/O
+                         net (fo=6, routed)           0.152    13.181    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[97]
+    SLICE_X74Y171        LUT4 (Prop_B6LUT_SLICEM_I2_O)
+                                                      0.052    13.233 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_2/O
+                         net (fo=32, routed)          0.237    13.470    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[1]
+    SLICE_X71Y169        LUT6 (Prop_C6LUT_SLICEM_I1_O)
+                                                      0.145    13.615 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b5__36/O
+                         net (fo=2, routed)           0.101    13.716    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[77]_i_9_1
+    SLICE_X71Y169        LUT6 (Prop_E6LUT_SLICEM_I3_O)
+                                                      0.124    13.840 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__36/ciphertext[109]_i_9/O
+                         net (fo=2, routed)           0.774    14.614    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_393
+    SLICE_X61Y167        LUT6 (Prop_F6LUT_SLICEM_I2_O)
+                                                      0.037    14.651 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[13]_i_10/O
+                         net (fo=1, routed)           0.090    14.741    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/ciphertext_reg[13]_i_2
+    SLICE_X61Y168        LUT6 (Prop_C6LUT_SLICEM_I4_O)
+                                                      0.037    14.778 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/ciphertext[13]_i_5/O
+                         net (fo=1, routed)           0.021    14.799    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control_n_22
+    SLICE_X61Y168        MUXF7 (Prop_F7MUX_CD_SLICEM_I1_O)
+                                                      0.068    14.867 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext_reg[13]_i_2/O
+                         net (fo=3, routed)           0.280    15.147    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/selected_round_key[13]
+    SLICE_X61Y177        LUT6 (Prop_G6LUT_SLICEM_I5_O)
+                                                      0.037    15.184 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[13]_i_2/O
+                         net (fo=1, routed)           0.090    15.274    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/normal_round_state[13]
+    SLICE_X60Y177        LUT6 (Prop_E6LUT_SLICEL_I4_O)
+                                                      0.051    15.325 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[13]_i_1/O
+                         net (fo=1, routed)           0.046    15.371    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in__0[13]
+    SLICE_X60Y177        FDRE                                         r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[13]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_pl_0 rise edge)
+                                                     10.000    10.000 r  
+                         propagated clock network latency
+                                                      1.830    11.830    
+                         clock pessimism              0.160    11.990    
+                         clock uncertainty           -0.130    11.861    
+    SLICE_X60Y177        FDRE (Setup_EFF_SLICEL_C_D)
+                                                      0.025    11.886    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[13]
+  -------------------------------------------------------------------
+                         required time                         11.886    
+                         arrival time                         -15.371    
+  -------------------------------------------------------------------
+                         slack                                 -3.486    
+
+Slack (VIOLATED) :        -3.484ns  (required time - arrival time)
+  Source:                 aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][3]_replica/C
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[50]/D
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_pl_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_pl_0 rise@10.000ns - clk_pl_0 rise@0.000ns)
+  Data Path Delay:        13.267ns  (logic 3.726ns (28.085%)  route 9.541ns (71.915%))
+  Logic Levels:           54  (LUT2=7 LUT3=3 LUT4=2 LUT5=4 LUT6=19 MUXF7=10 MUXF8=9)
+  Clock Path Skew:        -0.112ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.713ns = ( 11.713 - 10.000 ) 
+    Source Clock Delay      (SCD):    1.984ns
+    Clock Pessimism Removal (CPR):    0.158ns
+  Clock Uncertainty:      0.130ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.250ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_pl_0 rise edge)
+                                                      0.000     0.000 r  
+                         propagated clock network latency
+                                                      1.984     1.984    
+    SLICE_X60Y152        FDRE                         0.000     1.984 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][3]_replica/C
+    SLICE_X60Y152        FDRE (Prop_CFF_SLICEL_C_Q)
+                                                      0.079     2.063 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][3]_replica/Q
+                         net (fo=30, routed)          0.425     2.488    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/key_reg_reg_n_0_[3][3]_repN_alias
+    SLICE_X62Y155        LUT6 (Prop_E6LUT_SLICEL_I3_O)
+                                                      0.147     2.635 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b4__0/O
+                         net (fo=1, routed)           0.007     2.642    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__0/g0_b0__5_i_11_3
+    SLICE_X62Y155        MUXF7 (Prop_F7MUX_EF_SLICEL_I1_O)
+                                                      0.056     2.698 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__0/g0_b0__5_i_22/O
+                         net (fo=1, routed)           0.000     2.698    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__0/g0_b0__5_i_22_n_0
+    SLICE_X62Y155        MUXF8 (Prop_F8MUX_TOP_SLICEL_I1_O)
+                                                      0.026     2.724 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__0/g0_b0__5_i_11/O
+                         net (fo=13, routed)          0.177     2.901    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/sub_word_return[12]
+    SLICE_X62Y155        LUT5 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.098     2.999 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__5_i_5/O
+                         net (fo=34, routed)          0.235     3.234    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__5_i_5_n_0
+    SLICE_X63Y156        LUT6 (Prop_B6LUT_SLICEM_I4_O)
+                                                      0.100     3.334 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b5__5/O
+                         net (fo=1, routed)           0.017     3.351    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__5/g0_b0__10_i_12_2
+    SLICE_X63Y156        MUXF7 (Prop_F7MUX_AB_SLICEM_I0_O)
+                                                      0.060     3.411 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__5/g0_b0__10_i_25/O
+                         net (fo=1, routed)           0.000     3.411    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__5/g0_b0__10_i_25_n_0
+    SLICE_X63Y156        MUXF8 (Prop_F8MUX_BOT_SLICEM_I1_O)
+                                                      0.028     3.439 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__5/g0_b0__10_i_12/O
+                         net (fo=12, routed)          0.251     3.689    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_70
+    SLICE_X65Y157        LUT3 (Prop_B6LUT_SLICEL_I2_O)
+                                                      0.051     3.740 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__10_i_6/O
+                         net (fo=35, routed)          0.521     4.262    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__10_i_6_n_0
+    SLICE_X67Y159        LUT6 (Prop_B6LUT_SLICEM_I5_O)
+                                                      0.125     4.387 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b3__10/O
+                         net (fo=1, routed)           0.017     4.404    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__10/g0_b0__11_i_20_0
+    SLICE_X67Y159        MUXF7 (Prop_F7MUX_AB_SLICEM_I0_O)
+                                                      0.060     4.464 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__10/g0_b0__11_i_33/O
+                         net (fo=1, routed)           0.000     4.464    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__10/g0_b0__11_i_33_n_0
+    SLICE_X67Y159        MUXF8 (Prop_F8MUX_BOT_SLICEM_I1_O)
+                                                      0.028     4.492 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__10/g0_b0__11_i_20/O
+                         net (fo=9, routed)           0.337     4.829    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_132
+    SLICE_X71Y158        LUT4 (Prop_A6LUT_SLICEM_I2_O)
+                                                      0.038     4.867 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__11_i_10/O
+                         net (fo=6, routed)           0.115     4.982    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[91]
+    SLICE_X72Y158        LUT5 (Prop_G6LUT_SLICEL_I2_O)
+                                                      0.149     5.131 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__11_i_4/O
+                         net (fo=33, routed)          0.190     5.320    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__11_i_4_n_0
+    SLICE_X73Y156        LUT6 (Prop_D6LUT_SLICEM_I3_O)
+                                                      0.145     5.465 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b5__11/O
+                         net (fo=1, routed)           0.025     5.490    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__11/g0_b0__16_i_18_2
+    SLICE_X73Y156        MUXF7 (Prop_F7MUX_CD_SLICEM_I0_O)
+                                                      0.062     5.552 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__11/g0_b0__16_i_30/O
+                         net (fo=1, routed)           0.000     5.552    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__11/g0_b0__16_i_30_n_0
+    SLICE_X73Y156        MUXF8 (Prop_F8MUX_BOT_SLICEM_I0_O)
+                                                      0.030     5.582 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__11/g0_b0__16_i_18/O
+                         net (fo=5, routed)           0.269     5.851    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_141
+    SLICE_X69Y155        LUT3 (Prop_E5LUT_SLICEL_I2_O)
+                                                      0.070     5.921 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__16_i_12/O
+                         net (fo=2, routed)           0.160     6.081    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__16_i_12_n_0
+    SLICE_X69Y152        LUT2 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.035     6.116 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__16_i_6/O
+                         net (fo=33, routed)          0.791     6.908    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__16_i_6_n_0
+    SLICE_X65Y158        LUT6 (Prop_A6LUT_SLICEL_I5_O)
+                                                      0.050     6.958 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b3__16/O
+                         net (fo=1, routed)           0.009     6.967    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__16/g0_b0__21_i_10_3
+    SLICE_X65Y158        MUXF7 (Prop_F7MUX_AB_SLICEL_I1_O)
+                                                      0.057     7.024 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__16/g0_b0__21_i_21/O
+                         net (fo=1, routed)           0.000     7.024    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__16/g0_b0__21_i_21_n_0
+    SLICE_X65Y158        MUXF8 (Prop_F8MUX_BOT_SLICEL_I1_O)
+                                                      0.026     7.050 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__16/g0_b0__21_i_10/O
+                         net (fo=9, routed)           0.443     7.493    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_195
+    SLICE_X59Y157        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.035     7.528 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__21_i_4/O
+                         net (fo=35, routed)          0.366     7.893    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__21_i_4_n_0
+    SLICE_X55Y162        LUT6 (Prop_D6LUT_SLICEL_I3_O)
+                                                      0.099     7.992 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b0__21/O
+                         net (fo=1, routed)           0.009     8.001    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__21/g0_b0__34_i_19_1
+    SLICE_X55Y162        MUXF7 (Prop_F7MUX_CD_SLICEL_I0_O)
+                                                      0.056     8.057 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__21/g0_b0__34_i_36/O
+                         net (fo=1, routed)           0.000     8.057    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__21/g0_b0__34_i_36_n_0
+    SLICE_X55Y162        MUXF8 (Prop_F8MUX_BOT_SLICEL_I0_O)
+                                                      0.026     8.083 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__21/g0_b0__34_i_19/O
+                         net (fo=4, routed)           0.139     8.222    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_253
+    SLICE_X55Y164        LUT6 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.035     8.257 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__26_i_17/O
+                         net (fo=5, routed)           0.103     8.360    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_4_in[112]
+    SLICE_X55Y166        LUT6 (Prop_C6LUT_SLICEL_I5_O)
+                                                      0.035     8.395 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__26_i_7/O
+                         net (fo=1, routed)           0.152     8.547    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_4_in[48]
+    SLICE_X57Y166        LUT2 (Prop_A6LUT_SLICEM_I1_O)
+                                                      0.100     8.647 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__26_i_1/O
+                         net (fo=35, routed)          0.849     9.497    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_4_in[16]
+    SLICE_X66Y167        LUT6 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.098     9.595 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b1__26/O
+                         net (fo=1, routed)           0.009     9.604    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__26/g0_b0__35_i_69_3
+    SLICE_X66Y167        MUXF7 (Prop_F7MUX_AB_SLICEL_I1_O)
+                                                      0.057     9.661 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__26/g0_b0__35_i_98/O
+                         net (fo=1, routed)           0.000     9.661    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__26/g0_b0__35_i_98_n_0
+    SLICE_X66Y167        MUXF8 (Prop_F8MUX_BOT_SLICEL_I1_O)
+                                                      0.026     9.687 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__26/g0_b0__35_i_69/O
+                         net (fo=3, routed)           0.136     9.823    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_289
+    SLICE_X67Y167        LUT4 (Prop_F6LUT_SLICEM_I3_O)
+                                                      0.088     9.911 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__35_i_28/O
+                         net (fo=3, routed)           0.096    10.007    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__35_i_28_n_0
+    SLICE_X68Y167        LUT5 (Prop_B6LUT_SLICEL_I4_O)
+                                                      0.124    10.131 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_20/O
+                         net (fo=3, routed)           0.047    10.178    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[121]
+    SLICE_X68Y167        LUT2 (Prop_A6LUT_SLICEL_I1_O)
+                                                      0.050    10.228 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_8/O
+                         net (fo=3, routed)           0.294    10.522    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[89]
+    SLICE_X71Y168        LUT2 (Prop_E6LUT_SLICEM_I1_O)
+                                                      0.052    10.574 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_2/O
+                         net (fo=35, routed)          0.358    10.933    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[25]
+    SLICE_X76Y169        LUT6 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.148    11.081 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b5__27/O
+                         net (fo=1, routed)           0.009    11.090    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__27/g0_b0__36_i_60_2
+    SLICE_X76Y169        MUXF7 (Prop_F7MUX_AB_SLICEL_I0_O)
+                                                      0.056    11.146 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__27/g0_b0__36_i_83/O
+                         net (fo=1, routed)           0.000    11.146    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__27/g0_b0__36_i_83_n_0
+    SLICE_X76Y169        MUXF8 (Prop_F8MUX_BOT_SLICEL_I1_O)
+                                                      0.026    11.172 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__27/g0_b0__36_i_60/O
+                         net (fo=2, routed)           0.175    11.347    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_304
+    SLICE_X76Y169        LUT2 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.049    11.396 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_63/O
+                         net (fo=5, routed)           0.085    11.481    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_63_n_0
+    SLICE_X77Y169        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.049    11.530 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_24/O
+                         net (fo=6, routed)           0.153    11.683    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_24_n_0
+    SLICE_X75Y171        LUT2 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.049    11.732 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__32_i_12/O
+                         net (fo=4, routed)           0.243    11.975    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_2_in[37]
+    SLICE_X70Y171        LUT2 (Prop_E5LUT_SLICEM_I1_O)
+                                                      0.070    12.045 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__32_i_6/O
+                         net (fo=33, routed)          0.738    12.783    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__32_i_6_n_0
+    SLICE_X64Y173        LUT6 (Prop_D6LUT_SLICEM_I5_O)
+                                                      0.145    12.928 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b1__32/O
+                         net (fo=1, routed)           0.025    12.953    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__32/g0_b0__37_i_27_0
+    SLICE_X64Y173        MUXF7 (Prop_F7MUX_CD_SLICEM_I0_O)
+                                                      0.062    13.015 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__32/g0_b0__37_i_56/O
+                         net (fo=1, routed)           0.000    13.015    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__32/g0_b0__37_i_56_n_0
+    SLICE_X64Y173        MUXF8 (Prop_F8MUX_BOT_SLICEM_I0_O)
+                                                      0.030    13.045 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__32/g0_b0__37_i_27/O
+                         net (fo=5, routed)           0.155    13.200    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_322
+    SLICE_X64Y174        LUT6 (Prop_D6LUT_SLICEM_I2_O)
+                                                      0.122    13.322 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_8/O
+                         net (fo=4, routed)           0.367    13.689    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[105]
+    SLICE_X59Y174        LUT3 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.035    13.724 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_2/O
+                         net (fo=33, routed)          0.358    14.082    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[9]
+    SLICE_X55Y170        LUT6 (Prop_D6LUT_SLICEL_I1_O)
+                                                      0.099    14.181 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b2__37/O
+                         net (fo=2, routed)           0.009    14.190    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[82]_i_9_2
+    SLICE_X55Y170        MUXF7 (Prop_F7MUX_CD_SLICEL_I0_O)
+                                                      0.063    14.253 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__37/ciphertext_reg[82]_i_14/O
+                         net (fo=1, routed)           0.232    14.485    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_409
+    SLICE_X53Y168        LUT6 (Prop_C6LUT_SLICEM_I1_O)
+                                                      0.098    14.583 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[82]_i_9/O
+                         net (fo=2, routed)           0.090    14.673    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[82]_i_9_n_0
+    SLICE_X52Y167        LUT6 (Prop_G6LUT_SLICEL_I1_O)
+                                                      0.035    14.708 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[50]_i_4/O
+                         net (fo=1, routed)           0.096    14.804    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[50]_i_4_n_0
+    SLICE_X53Y167        LUT5 (Prop_G6LUT_SLICEM_I0_O)
+                                                      0.052    14.856 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[50]_i_2/O
+                         net (fo=3, routed)           0.115    14.971    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/selected_round_key[50]
+    SLICE_X54Y167        LUT6 (Prop_F6LUT_SLICEM_I5_O)
+                                                      0.098    15.069 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[50]_i_2/O
+                         net (fo=1, routed)           0.085    15.154    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/normal_round_state[50]
+    SLICE_X54Y168        LUT6 (Prop_H6LUT_SLICEM_I4_O)
+                                                      0.039    15.193 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[50]_i_1/O
+                         net (fo=1, routed)           0.058    15.251    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in__0[50]
+    SLICE_X54Y168        FDRE                                         r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[50]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_pl_0 rise edge)
+                                                     10.000    10.000 r  
+                         propagated clock network latency
+                                                      1.713    11.713    
+                         clock pessimism              0.158    11.872    
+                         clock uncertainty           -0.130    11.742    
+    SLICE_X54Y168        FDRE (Setup_HFF_SLICEM_C_D)
+                                                      0.025    11.767    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[50]
+  -------------------------------------------------------------------
+                         required time                         11.767    
+                         arrival time                         -15.251    
+  -------------------------------------------------------------------
+                         slack                                 -3.484    
+
+Slack (VIOLATED) :        -3.484ns  (required time - arrival time)
+  Source:                 aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/C
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[58]/D
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_pl_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_pl_0 rise@10.000ns - clk_pl_0 rise@0.000ns)
+  Data Path Delay:        13.395ns  (logic 3.684ns (27.502%)  route 9.711ns (72.498%))
+  Logic Levels:           51  (LUT2=6 LUT3=5 LUT4=3 LUT5=5 LUT6=19 MUXF7=7 MUXF8=6)
+  Clock Path Skew:        0.016ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.825ns = ( 11.825 - 10.000 ) 
+    Source Clock Delay      (SCD):    1.969ns
+    Clock Pessimism Removal (CPR):    0.160ns
+  Clock Uncertainty:      0.130ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.250ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_pl_0 rise edge)
+                                                      0.000     0.000 r  
+                         propagated clock network latency
+                                                      1.969     1.969    
+    SLICE_X63Y152        FDRE                         0.000     1.969 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/C
+    SLICE_X63Y152        FDRE (Prop_BFF2_SLICEM_C_Q)
+                                                      0.080     2.049 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/Q
+                         net (fo=17, routed)          0.231     2.280    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/key_reg_reg_n_0_[3][8]_repN_2_alias
+    SLICE_X62Y151        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.149     2.429 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b6__1/O
+                         net (fo=4, routed)           0.156     2.585    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[54]_i_16
+    SLICE_X62Y153        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.123     2.708 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__1/g0_b0__35_i_56/O
+                         net (fo=13, routed)          0.048     2.756    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/sub_word_return[22]
+    SLICE_X62Y153        LUT5 (Prop_H6LUT_SLICEL_I3_O)
+                                                      0.090     2.846 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__7_i_27/O
+                         net (fo=26, routed)          0.695     3.541    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[126]_i_29
+    SLICE_X68Y153        MUXF7 (Prop_F7MUX_AB_SLICEL_S_O)
+                                                      0.065     3.606 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_21/O
+                         net (fo=1, routed)           0.000     3.606    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_21_n_0
+    SLICE_X68Y153        MUXF8 (Prop_F8MUX_BOT_SLICEL_I1_O)
+                                                      0.026     3.632 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_10/O
+                         net (fo=14, routed)          0.147     3.779    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_84
+    SLICE_X68Y155        LUT3 (Prop_E6LUT_SLICEL_I0_O)
+                                                      0.090     3.869 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__7_i_4/O
+                         net (fo=33, routed)          0.473     4.342    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_8_in[27]
+    SLICE_X73Y154        LUT6 (Prop_G6LUT_SLICEM_I3_O)
+                                                      0.150     4.492 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b4__7/O
+                         net (fo=1, routed)           0.017     4.509    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_17_1
+    SLICE_X73Y154        MUXF7 (Prop_F7MUX_GH_SLICEM_I1_O)
+                                                      0.060     4.569 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_28/O
+                         net (fo=1, routed)           0.000     4.569    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_28_n_0
+    SLICE_X73Y154        MUXF8 (Prop_F8MUX_TOP_SLICEM_I0_O)
+                                                      0.028     4.597 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_17/O
+                         net (fo=11, routed)          0.150     4.748    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_92
+    SLICE_X72Y154        LUT4 (Prop_A6LUT_SLICEL_I2_O)
+                                                      0.098     4.846 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__12_i_11/O
+                         net (fo=7, routed)           0.047     4.893    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[36]
+    SLICE_X72Y153        LUT2 (Prop_H6LUT_SLICEL_I1_O)
+                                                      0.036     4.929 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__12_i_5/O
+                         net (fo=33, routed)          0.367     5.295    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[4]
+    SLICE_X67Y155        LUT6 (Prop_B6LUT_SLICEM_I4_O)
+                                                      0.089     5.384 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b5__12/O
+                         net (fo=1, routed)           0.017     5.401    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_18_2
+    SLICE_X67Y155        MUXF7 (Prop_F7MUX_AB_SLICEM_I0_O)
+                                                      0.060     5.461 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_31/O
+                         net (fo=1, routed)           0.000     5.461    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_31_n_0
+    SLICE_X67Y155        MUXF8 (Prop_F8MUX_BOT_SLICEM_I1_O)
+                                                      0.028     5.489 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_18/O
+                         net (fo=6, routed)           0.246     5.736    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_153
+    SLICE_X67Y159        LUT5 (Prop_E5LUT_SLICEM_I2_O)
+                                                      0.070     5.806 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__17_i_12/O
+                         net (fo=3, routed)           0.447     6.253    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_6_in[109]
+    SLICE_X64Y160        LUT3 (Prop_H6LUT_SLICEM_I1_O)
+                                                      0.039     6.292 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__17_i_6/O
+                         net (fo=34, routed)          0.420     6.711    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_6_in[13]
+    SLICE_X61Y161        LUT6 (Prop_E6LUT_SLICEM_I5_O)
+                                                      0.091     6.802 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b4__17/O
+                         net (fo=1, routed)           0.012     6.814    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_11_3
+    SLICE_X61Y161        MUXF7 (Prop_F7MUX_EF_SLICEM_I1_O)
+                                                      0.059     6.873 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_23/O
+                         net (fo=1, routed)           0.000     6.873    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_23_n_0
+    SLICE_X61Y161        MUXF8 (Prop_F8MUX_TOP_SLICEM_I1_O)
+                                                      0.028     6.901 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_11/O
+                         net (fo=5, routed)           0.139     7.040    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_205
+    SLICE_X61Y162        LUT2 (Prop_B6LUT_SLICEM_I0_O)
+                                                      0.089     7.129 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__22_i_5/O
+                         net (fo=35, routed)          0.474     7.603    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_5_in[20]
+    SLICE_X65Y165        LUT6 (Prop_F6LUT_SLICEL_I4_O)
+                                                      0.123     7.726 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b2__22/O
+                         net (fo=1, routed)           0.011     7.737    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_25_0
+    SLICE_X65Y165        MUXF7 (Prop_F7MUX_EF_SLICEL_I0_O)
+                                                      0.057     7.794 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_37/O
+                         net (fo=1, routed)           0.000     7.794    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_37_n_0
+    SLICE_X65Y165        MUXF8 (Prop_F8MUX_TOP_SLICEL_I1_O)
+                                                      0.026     7.820 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_25/O
+                         net (fo=5, routed)           0.660     8.480    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_256
+    SLICE_X70Y166        LUT6 (Prop_E6LUT_SLICEM_I3_O)
+                                                      0.037     8.517 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_22/O
+                         net (fo=2, routed)           0.097     8.614    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_22_n_0
+    SLICE_X70Y164        LUT3 (Prop_D6LUT_SLICEM_I2_O)
+                                                      0.037     8.651 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_9/O
+                         net (fo=7, routed)           0.091     8.742    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_9_n_0
+    SLICE_X70Y165        LUT2 (Prop_A6LUT_SLICEM_I1_O)
+                                                      0.053     8.795 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b7__23_i_4/O
+                         net (fo=33, routed)          0.310     9.105    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_4_in[26]
+    SLICE_X74Y167        LUT6 (Prop_G6LUT_SLICEM_I3_O)
+                                                      0.150     9.255 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b4__23/O
+                         net (fo=1, routed)           0.017     9.272    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__32_i_15_1
+    SLICE_X74Y167        MUXF7 (Prop_F7MUX_GH_SLICEM_I1_O)
+                                                      0.060     9.332 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__32_i_17/O
+                         net (fo=1, routed)           0.000     9.332    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__32_i_17_n_0
+    SLICE_X74Y167        MUXF8 (Prop_F8MUX_TOP_SLICEM_I0_O)
+                                                      0.028     9.360 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__32_i_15/O
+                         net (fo=3, routed)           0.197     9.557    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_452
+    SLICE_X75Y167        LUT4 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.050     9.607 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_53/O
+                         net (fo=2, routed)           0.090     9.697    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_53_n_0
+    SLICE_X75Y168        LUT5 (Prop_D6LUT_SLICEL_I4_O)
+                                                      0.036     9.733 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_15/O
+                         net (fo=2, routed)           0.093     9.826    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[100]
+    SLICE_X74Y168        LUT4 (Prop_G6LUT_SLICEM_I3_O)
+                                                      0.052     9.878 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_13/O
+                         net (fo=5, routed)           0.105     9.983    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_13_n_0
+    SLICE_X73Y168        LUT5 (Prop_E6LUT_SLICEM_I4_O)
+                                                      0.052    10.035 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_6/O
+                         net (fo=34, routed)          0.391    10.426    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[4]
+    SLICE_X69Y164        LUT6 (Prop_E6LUT_SLICEL_I5_O)
+                                                      0.090    10.516 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b3__28/O
+                         net (fo=1, routed)           0.194    10.710    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/g0_b0__37_i_15_2
+    SLICE_X66Y164        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.098    10.808 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__28/g0_b0__37_i_39/O
+                         net (fo=2, routed)           0.096    10.904    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_465
+    SLICE_X66Y164        LUT2 (Prop_E5LUT_SLICEL_I1_O)
+                                                      0.070    10.974 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_42/O
+                         net (fo=4, routed)           0.561    11.535    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_42_n_0
+    SLICE_X63Y166        LUT6 (Prop_H6LUT_SLICEM_I5_O)
+                                                      0.039    11.574 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_16/O
+                         net (fo=5, routed)           0.281    11.855    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_16_n_0
+    SLICE_X61Y166        LUT3 (Prop_E5LUT_SLICEM_I2_O)
+                                                      0.070    11.925 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_10/O
+                         net (fo=3, routed)           0.262    12.187    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_2_in[43]
+    SLICE_X57Y171        LUT2 (Prop_G6LUT_SLICEM_I1_O)
+                                                      0.037    12.224 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_4/O
+                         net (fo=33, routed)          0.252    12.476    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_4_n_0
+    SLICE_X57Y175        LUT6 (Prop_A6LUT_SLICEM_I3_O)
+                                                      0.150    12.626 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b5__33/O
+                         net (fo=1, routed)           0.181    12.807    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[21]_i_10_1
+    SLICE_X53Y175        LUT6 (Prop_B6LUT_SLICEM_I3_O)
+                                                      0.052    12.859 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__33/g0_b0__38_i_40/O
+                         net (fo=4, routed)           0.093    12.952    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_337
+    SLICE_X53Y174        LUT6 (Prop_C6LUT_SLICEM_I2_O)
+                                                      0.051    13.003 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_24/O
+                         net (fo=3, routed)           0.152    13.156    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[117]
+    SLICE_X55Y174        LUT3 (Prop_E5LUT_SLICEL_I2_O)
+                                                      0.138    13.294 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_15/O
+                         net (fo=2, routed)           0.121    13.415    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[53]
+    SLICE_X56Y174        LUT2 (Prop_E6LUT_SLICEM_I1_O)
+                                                      0.052    13.467 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_6/O
+                         net (fo=33, routed)          0.578    14.044    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[21]
+    SLICE_X63Y172        LUT6 (Prop_G6LUT_SLICEM_I5_O)
+                                                      0.150    14.194 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b2__38/O
+                         net (fo=2, routed)           0.017    14.211    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[90]_i_9_3
+    SLICE_X63Y172        MUXF7 (Prop_F7MUX_GH_SLICEM_I1_O)
+                                                      0.067    14.278 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__38/ciphertext_reg[90]_i_14/O
+                         net (fo=1, routed)           0.184    14.462    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_438
+    SLICE_X64Y172        LUT6 (Prop_F6LUT_SLICEM_I3_O)
+                                                      0.037    14.499 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[90]_i_9/O
+                         net (fo=3, routed)           0.053    14.552    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[90]_i_9_n_0
+    SLICE_X64Y172        LUT6 (Prop_H6LUT_SLICEM_I1_O)
+                                                      0.090    14.642 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[58]_i_4/O
+                         net (fo=1, routed)           0.348    14.990    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[58]_i_4_n_0
+    SLICE_X66Y172        LUT5 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.035    15.025 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[58]_i_2/O
+                         net (fo=3, routed)           0.096    15.121    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/selected_round_key[58]
+    SLICE_X66Y173        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.050    15.171 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[58]_i_2/O
+                         net (fo=1, routed)           0.043    15.214    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/normal_round_state[58]
+    SLICE_X66Y173        LUT6 (Prop_H6LUT_SLICEL_I4_O)
+                                                      0.099    15.313 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[58]_i_1/O
+                         net (fo=1, routed)           0.051    15.364    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in__0[58]
+    SLICE_X66Y173        FDRE                                         r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[58]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_pl_0 rise edge)
+                                                     10.000    10.000 r  
+                         propagated clock network latency
+                                                      1.825    11.825    
+                         clock pessimism              0.160    11.985    
+                         clock uncertainty           -0.130    11.855    
+    SLICE_X66Y173        FDRE (Setup_HFF_SLICEL_C_D)
+                                                      0.025    11.880    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[58]
+  -------------------------------------------------------------------
+                         required time                         11.880    
+                         arrival time                         -15.364    
+  -------------------------------------------------------------------
+                         slack                                 -3.484    
+
+Slack (VIOLATED) :        -3.483ns  (required time - arrival time)
+  Source:                 aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/C
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[30]/D
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_pl_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_pl_0 rise@10.000ns - clk_pl_0 rise@0.000ns)
+  Data Path Delay:        13.510ns  (logic 3.755ns (27.793%)  route 9.755ns (72.207%))
+  Logic Levels:           50  (LUT2=6 LUT3=4 LUT4=3 LUT5=3 LUT6=21 MUXF7=7 MUXF8=6)
+  Clock Path Skew:        0.132ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.941ns = ( 11.941 - 10.000 ) 
+    Source Clock Delay      (SCD):    1.969ns
+    Clock Pessimism Removal (CPR):    0.160ns
+  Clock Uncertainty:      0.130ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.250ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_pl_0 rise edge)
+                                                      0.000     0.000 r  
+                         propagated clock network latency
+                                                      1.969     1.969    
+    SLICE_X63Y152        FDRE                         0.000     1.969 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/C
+    SLICE_X63Y152        FDRE (Prop_BFF2_SLICEM_C_Q)
+                                                      0.080     2.049 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/Q
+                         net (fo=17, routed)          0.231     2.280    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/key_reg_reg_n_0_[3][8]_repN_2_alias
+    SLICE_X62Y151        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.149     2.429 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b6__1/O
+                         net (fo=4, routed)           0.156     2.585    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[54]_i_16
+    SLICE_X62Y153        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.123     2.708 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__1/g0_b0__35_i_56/O
+                         net (fo=13, routed)          0.048     2.756    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/sub_word_return[22]
+    SLICE_X62Y153        LUT5 (Prop_H6LUT_SLICEL_I3_O)
+                                                      0.090     2.846 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__7_i_27/O
+                         net (fo=26, routed)          0.695     3.541    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[126]_i_29
+    SLICE_X68Y153        MUXF7 (Prop_F7MUX_AB_SLICEL_S_O)
+                                                      0.065     3.606 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_21/O
+                         net (fo=1, routed)           0.000     3.606    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_21_n_0
+    SLICE_X68Y153        MUXF8 (Prop_F8MUX_BOT_SLICEL_I1_O)
+                                                      0.026     3.632 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_10/O
+                         net (fo=14, routed)          0.147     3.779    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_84
+    SLICE_X68Y155        LUT3 (Prop_E6LUT_SLICEL_I0_O)
+                                                      0.090     3.869 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__7_i_4/O
+                         net (fo=33, routed)          0.473     4.342    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_8_in[27]
+    SLICE_X73Y154        LUT6 (Prop_G6LUT_SLICEM_I3_O)
+                                                      0.150     4.492 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b4__7/O
+                         net (fo=1, routed)           0.017     4.509    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_17_1
+    SLICE_X73Y154        MUXF7 (Prop_F7MUX_GH_SLICEM_I1_O)
+                                                      0.060     4.569 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_28/O
+                         net (fo=1, routed)           0.000     4.569    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_28_n_0
+    SLICE_X73Y154        MUXF8 (Prop_F8MUX_TOP_SLICEM_I0_O)
+                                                      0.028     4.597 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_17/O
+                         net (fo=11, routed)          0.150     4.748    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_92
+    SLICE_X72Y154        LUT4 (Prop_A6LUT_SLICEL_I2_O)
+                                                      0.098     4.846 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__12_i_11/O
+                         net (fo=7, routed)           0.047     4.893    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[36]
+    SLICE_X72Y153        LUT2 (Prop_H6LUT_SLICEL_I1_O)
+                                                      0.036     4.929 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__12_i_5/O
+                         net (fo=33, routed)          0.367     5.295    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[4]
+    SLICE_X67Y155        LUT6 (Prop_B6LUT_SLICEM_I4_O)
+                                                      0.089     5.384 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b5__12/O
+                         net (fo=1, routed)           0.017     5.401    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_18_2
+    SLICE_X67Y155        MUXF7 (Prop_F7MUX_AB_SLICEM_I0_O)
+                                                      0.060     5.461 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_31/O
+                         net (fo=1, routed)           0.000     5.461    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_31_n_0
+    SLICE_X67Y155        MUXF8 (Prop_F8MUX_BOT_SLICEM_I1_O)
+                                                      0.028     5.489 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_18/O
+                         net (fo=6, routed)           0.246     5.736    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_153
+    SLICE_X67Y159        LUT5 (Prop_E5LUT_SLICEM_I2_O)
+                                                      0.070     5.806 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__17_i_12/O
+                         net (fo=3, routed)           0.447     6.253    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_6_in[109]
+    SLICE_X64Y160        LUT3 (Prop_H6LUT_SLICEM_I1_O)
+                                                      0.039     6.292 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__17_i_6/O
+                         net (fo=34, routed)          0.420     6.711    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_6_in[13]
+    SLICE_X61Y161        LUT6 (Prop_E6LUT_SLICEM_I5_O)
+                                                      0.091     6.802 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b4__17/O
+                         net (fo=1, routed)           0.012     6.814    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_11_3
+    SLICE_X61Y161        MUXF7 (Prop_F7MUX_EF_SLICEM_I1_O)
+                                                      0.059     6.873 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_23/O
+                         net (fo=1, routed)           0.000     6.873    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_23_n_0
+    SLICE_X61Y161        MUXF8 (Prop_F8MUX_TOP_SLICEM_I1_O)
+                                                      0.028     6.901 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_11/O
+                         net (fo=5, routed)           0.139     7.040    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_205
+    SLICE_X61Y162        LUT2 (Prop_B6LUT_SLICEM_I0_O)
+                                                      0.089     7.129 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__22_i_5/O
+                         net (fo=35, routed)          0.517     7.646    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_5_in[20]
+    SLICE_X65Y165        LUT6 (Prop_A6LUT_SLICEL_I4_O)
+                                                      0.090     7.736 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b4__22/O
+                         net (fo=1, routed)           0.009     7.745    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_40_1
+    SLICE_X65Y165        MUXF7 (Prop_F7MUX_AB_SLICEL_I1_O)
+                                                      0.057     7.802 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_53/O
+                         net (fo=1, routed)           0.000     7.802    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_53_n_0
+    SLICE_X65Y165        MUXF8 (Prop_F8MUX_BOT_SLICEL_I1_O)
+                                                      0.026     7.828 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_40/O
+                         net (fo=4, routed)           0.580     8.408    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_258
+    SLICE_X69Y167        LUT6 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.035     8.443 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_28/O
+                         net (fo=2, routed)           0.088     8.531    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_28_n_0
+    SLICE_X69Y167        LUT3 (Prop_H6LUT_SLICEL_I2_O)
+                                                      0.036     8.567 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_13/O
+                         net (fo=7, routed)           0.107     8.674    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_4_in[92]
+    SLICE_X70Y167        LUT2 (Prop_E6LUT_SLICEM_I1_O)
+                                                      0.052     8.726 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b7__23_i_6/O
+                         net (fo=33, routed)          0.443     9.169    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_4_in[28]
+    SLICE_X77Y165        LUT6 (Prop_D6LUT_SLICEL_I5_O)
+                                                      0.099     9.268 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b3__23/O
+                         net (fo=1, routed)           0.009     9.277    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__36_i_76_0
+    SLICE_X77Y165        MUXF7 (Prop_F7MUX_CD_SLICEL_I0_O)
+                                                      0.056     9.333 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__36_i_102/O
+                         net (fo=1, routed)           0.000     9.333    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__36_i_102_n_0
+    SLICE_X77Y165        MUXF8 (Prop_F8MUX_BOT_SLICEL_I0_O)
+                                                      0.026     9.359 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__36_i_76/O
+                         net (fo=3, routed)           0.197     9.557    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_453
+    SLICE_X74Y166        LUT4 (Prop_F6LUT_SLICEM_I3_O)
+                                                      0.148     9.705 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_47/O
+                         net (fo=2, routed)           0.047     9.752    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_47_n_0
+    SLICE_X74Y166        LUT5 (Prop_H6LUT_SLICEM_I4_O)
+                                                      0.090     9.842 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_9/O
+                         net (fo=7, routed)           0.152     9.993    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[99]
+    SLICE_X73Y166        LUT4 (Prop_G6LUT_SLICEM_I2_O)
+                                                      0.037    10.030 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_2/O
+                         net (fo=34, routed)          0.412    10.442    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_2_n_0
+    SLICE_X69Y163        LUT6 (Prop_A6LUT_SLICEL_I1_O)
+                                                      0.124    10.566 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b1__28/O
+                         net (fo=1, routed)           0.275    10.841    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[9]_i_11_2
+    SLICE_X66Y168        LUT6 (Prop_D6LUT_SLICEL_I5_O)
+                                                      0.099    10.940 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__28/g0_b0__37_i_28/O
+                         net (fo=3, routed)           0.531    11.472    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_467
+    SLICE_X62Y172        LUT2 (Prop_E6LUT_SLICEL_I1_O)
+                                                      0.035    11.507 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_30/O
+                         net (fo=4, routed)           0.103    11.610    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_30_n_0
+    SLICE_X62Y174        LUT6 (Prop_A6LUT_SLICEL_I5_O)
+                                                      0.098    11.708 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_9/O
+                         net (fo=5, routed)           0.252    11.960    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_9_n_0
+    SLICE_X61Y174        LUT3 (Prop_A6LUT_SLICEM_I2_O)
+                                                      0.053    12.013 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_8/O
+                         net (fo=2, routed)           0.236    12.249    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_8_n_0
+    SLICE_X54Y174        LUT2 (Prop_B6LUT_SLICEM_I1_O)
+                                                      0.037    12.286 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_2/O
+                         net (fo=33, routed)          0.252    12.538    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_2_in[9]
+    SLICE_X56Y173        LUT6 (Prop_F6LUT_SLICEM_I1_O)
+                                                      0.148    12.686 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b1__33/O
+                         net (fo=1, routed)           0.104    12.790    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[17]_i_10_1
+    SLICE_X56Y172        LUT6 (Prop_B6LUT_SLICEM_I3_O)
+                                                      0.149    12.939 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__33/g0_b0__38_i_28/O
+                         net (fo=4, routed)           0.150    13.089    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_333
+    SLICE_X56Y170        LUT6 (Prop_B6LUT_SLICEM_I2_O)
+                                                      0.037    13.126 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_19/O
+                         net (fo=3, routed)           0.120    13.246    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[113]
+    SLICE_X57Y170        LUT6 (Prop_D6LUT_SLICEM_I5_O)
+                                                      0.145    13.391 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_10/O
+                         net (fo=2, routed)           0.043    13.434    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_10_n_0
+    SLICE_X57Y170        LUT2 (Prop_E6LUT_SLICEM_I1_O)
+                                                      0.037    13.471 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_2/O
+                         net (fo=33, routed)          0.493    13.964    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[17]
+    SLICE_X63Y176        LUT6 (Prop_C6LUT_SLICEM_I1_O)
+                                                      0.145    14.109 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b6__38/O
+                         net (fo=1, routed)           0.021    14.130    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[126]_i_11_0
+    SLICE_X63Y176        MUXF7 (Prop_F7MUX_CD_SLICEM_I1_O)
+                                                      0.068    14.198 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__38/ciphertext_reg[126]_i_23/O
+                         net (fo=1, routed)           0.244    14.442    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_445
+    SLICE_X64Y178        LUT6 (Prop_G6LUT_SLICEM_I4_O)
+                                                      0.052    14.494 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[126]_i_11/O
+                         net (fo=4, routed)           0.468    14.962    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/ciphertext[126]_i_2_1
+    SLICE_X67Y179        LUT6 (Prop_A6LUT_SLICEM_I1_O)
+                                                      0.053    15.015 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/ciphertext[30]_i_5/O
+                         net (fo=1, routed)           0.090    15.105    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control_n_81
+    SLICE_X67Y178        LUT6 (Prop_A6LUT_SLICEM_I2_O)
+                                                      0.038    15.143 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[30]_i_2/O
+                         net (fo=3, routed)           0.096    15.239    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/selected_round_key[30]
+    SLICE_X67Y178        LUT6 (Prop_G6LUT_SLICEM_I5_O)
+                                                      0.037    15.276 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[30]_i_2/O
+                         net (fo=1, routed)           0.048    15.324    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/normal_round_state[30]
+    SLICE_X67Y178        LUT6 (Prop_E6LUT_SLICEM_I4_O)
+                                                      0.100    15.424 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[30]_i_1/O
+                         net (fo=1, routed)           0.055    15.479    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in__0[30]
+    SLICE_X67Y178        FDRE                                         r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[30]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_pl_0 rise edge)
+                                                     10.000    10.000 r  
+                         propagated clock network latency
+                                                      1.941    11.941    
+                         clock pessimism              0.160    12.101    
+                         clock uncertainty           -0.130    11.972    
+    SLICE_X67Y178        FDRE (Setup_EFF_SLICEM_C_D)
+                                                      0.025    11.997    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[30]
+  -------------------------------------------------------------------
+                         required time                         11.997    
+                         arrival time                         -15.479    
+  -------------------------------------------------------------------
+                         slack                                 -3.483    
+
+Slack (VIOLATED) :        -3.476ns  (required time - arrival time)
+  Source:                 aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/C
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[61]/D
+                            (rising edge-triggered cell FDRE clocked by clk_pl_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_pl_0
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_pl_0 rise@10.000ns - clk_pl_0 rise@0.000ns)
+  Data Path Delay:        13.382ns  (logic 3.602ns (26.917%)  route 9.780ns (73.083%))
+  Logic Levels:           51  (LUT2=6 LUT3=5 LUT4=3 LUT5=5 LUT6=19 MUXF7=7 MUXF8=6)
+  Clock Path Skew:        0.010ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.819ns = ( 11.819 - 10.000 ) 
+    Source Clock Delay      (SCD):    1.969ns
+    Clock Pessimism Removal (CPR):    0.160ns
+  Clock Uncertainty:      0.130ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.250ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_pl_0 rise edge)
+                                                      0.000     0.000 r  
+                         propagated clock network latency
+                                                      1.969     1.969    
+    SLICE_X63Y152        FDRE                         0.000     1.969 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/C
+    SLICE_X63Y152        FDRE (Prop_BFF2_SLICEM_C_Q)
+                                                      0.080     2.049 r  aes_system_i/aes_axi_fifo_0/inst/key_reg_reg[3][8]_replica_2/Q
+                         net (fo=17, routed)          0.231     2.280    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/key_reg_reg_n_0_[3][8]_repN_2_alias
+    SLICE_X62Y151        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.149     2.429 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b6__1/O
+                         net (fo=4, routed)           0.156     2.585    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[54]_i_16
+    SLICE_X62Y153        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.123     2.708 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__1/g0_b0__35_i_56/O
+                         net (fo=13, routed)          0.048     2.756    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/sub_word_return[22]
+    SLICE_X62Y153        LUT5 (Prop_H6LUT_SLICEL_I3_O)
+                                                      0.090     2.846 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__7_i_27/O
+                         net (fo=26, routed)          0.695     3.541    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[126]_i_29
+    SLICE_X68Y153        MUXF7 (Prop_F7MUX_AB_SLICEL_S_O)
+                                                      0.065     3.606 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_21/O
+                         net (fo=1, routed)           0.000     3.606    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_21_n_0
+    SLICE_X68Y153        MUXF8 (Prop_F8MUX_BOT_SLICEL_I1_O)
+                                                      0.026     3.632 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__6/g0_b0__7_i_10/O
+                         net (fo=14, routed)          0.147     3.779    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_84
+    SLICE_X68Y155        LUT3 (Prop_E6LUT_SLICEL_I0_O)
+                                                      0.090     3.869 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__7_i_4/O
+                         net (fo=33, routed)          0.473     4.342    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_8_in[27]
+    SLICE_X73Y154        LUT6 (Prop_G6LUT_SLICEM_I3_O)
+                                                      0.150     4.492 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b4__7/O
+                         net (fo=1, routed)           0.017     4.509    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_17_1
+    SLICE_X73Y154        MUXF7 (Prop_F7MUX_GH_SLICEM_I1_O)
+                                                      0.060     4.569 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_28/O
+                         net (fo=1, routed)           0.000     4.569    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_28_n_0
+    SLICE_X73Y154        MUXF8 (Prop_F8MUX_TOP_SLICEM_I0_O)
+                                                      0.028     4.597 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__7/g0_b0__12_i_17/O
+                         net (fo=11, routed)          0.150     4.748    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_92
+    SLICE_X72Y154        LUT4 (Prop_A6LUT_SLICEL_I2_O)
+                                                      0.098     4.846 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__12_i_11/O
+                         net (fo=7, routed)           0.047     4.893    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[36]
+    SLICE_X72Y153        LUT2 (Prop_H6LUT_SLICEL_I1_O)
+                                                      0.036     4.929 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__12_i_5/O
+                         net (fo=33, routed)          0.367     5.295    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_7_in[4]
+    SLICE_X67Y155        LUT6 (Prop_B6LUT_SLICEM_I4_O)
+                                                      0.089     5.384 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b5__12/O
+                         net (fo=1, routed)           0.017     5.401    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_18_2
+    SLICE_X67Y155        MUXF7 (Prop_F7MUX_AB_SLICEM_I0_O)
+                                                      0.060     5.461 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_31/O
+                         net (fo=1, routed)           0.000     5.461    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_31_n_0
+    SLICE_X67Y155        MUXF8 (Prop_F8MUX_BOT_SLICEM_I1_O)
+                                                      0.028     5.489 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__12/g0_b0__17_i_18/O
+                         net (fo=6, routed)           0.246     5.736    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_153
+    SLICE_X67Y159        LUT5 (Prop_E5LUT_SLICEM_I2_O)
+                                                      0.070     5.806 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__17_i_12/O
+                         net (fo=3, routed)           0.447     6.253    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_6_in[109]
+    SLICE_X64Y160        LUT3 (Prop_H6LUT_SLICEM_I1_O)
+                                                      0.039     6.292 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__17_i_6/O
+                         net (fo=34, routed)          0.420     6.711    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_6_in[13]
+    SLICE_X61Y161        LUT6 (Prop_E6LUT_SLICEM_I5_O)
+                                                      0.091     6.802 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b4__17/O
+                         net (fo=1, routed)           0.012     6.814    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_11_3
+    SLICE_X61Y161        MUXF7 (Prop_F7MUX_EF_SLICEM_I1_O)
+                                                      0.059     6.873 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_23/O
+                         net (fo=1, routed)           0.000     6.873    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_23_n_0
+    SLICE_X61Y161        MUXF8 (Prop_F8MUX_TOP_SLICEM_I1_O)
+                                                      0.028     6.901 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__17/g0_b0__22_i_11/O
+                         net (fo=5, routed)           0.139     7.040    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_205
+    SLICE_X61Y162        LUT2 (Prop_B6LUT_SLICEM_I0_O)
+                                                      0.089     7.129 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__22_i_5/O
+                         net (fo=35, routed)          0.474     7.603    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_5_in[20]
+    SLICE_X65Y165        LUT6 (Prop_F6LUT_SLICEL_I4_O)
+                                                      0.123     7.726 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b2__22/O
+                         net (fo=1, routed)           0.011     7.737    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_25_0
+    SLICE_X65Y165        MUXF7 (Prop_F7MUX_EF_SLICEL_I0_O)
+                                                      0.057     7.794 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_37/O
+                         net (fo=1, routed)           0.000     7.794    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_37_n_0
+    SLICE_X65Y165        MUXF8 (Prop_F8MUX_TOP_SLICEL_I1_O)
+                                                      0.026     7.820 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__22/g0_b0__27_i_25/O
+                         net (fo=5, routed)           0.660     8.480    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_256
+    SLICE_X70Y166        LUT6 (Prop_E6LUT_SLICEM_I3_O)
+                                                      0.037     8.517 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_22/O
+                         net (fo=2, routed)           0.097     8.614    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_22_n_0
+    SLICE_X70Y164        LUT3 (Prop_D6LUT_SLICEM_I2_O)
+                                                      0.037     8.651 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_9/O
+                         net (fo=7, routed)           0.091     8.742    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__27_i_9_n_0
+    SLICE_X70Y165        LUT2 (Prop_A6LUT_SLICEM_I1_O)
+                                                      0.053     8.795 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g3_b7__23_i_4/O
+                         net (fo=33, routed)          0.310     9.105    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_4_in[26]
+    SLICE_X74Y167        LUT6 (Prop_G6LUT_SLICEM_I3_O)
+                                                      0.150     9.255 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b4__23/O
+                         net (fo=1, routed)           0.017     9.272    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__32_i_15_1
+    SLICE_X74Y167        MUXF7 (Prop_F7MUX_GH_SLICEM_I1_O)
+                                                      0.060     9.332 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__32_i_17/O
+                         net (fo=1, routed)           0.000     9.332    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__32_i_17_n_0
+    SLICE_X74Y167        MUXF8 (Prop_F8MUX_TOP_SLICEM_I0_O)
+                                                      0.028     9.360 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__23/g0_b0__32_i_15/O
+                         net (fo=3, routed)           0.197     9.557    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_452
+    SLICE_X75Y167        LUT4 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.050     9.607 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_53/O
+                         net (fo=2, routed)           0.090     9.697    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__36_i_53_n_0
+    SLICE_X75Y168        LUT5 (Prop_D6LUT_SLICEL_I4_O)
+                                                      0.036     9.733 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_15/O
+                         net (fo=2, routed)           0.093     9.826    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[100]
+    SLICE_X74Y168        LUT4 (Prop_G6LUT_SLICEM_I3_O)
+                                                      0.052     9.878 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_13/O
+                         net (fo=5, routed)           0.105     9.983    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_13_n_0
+    SLICE_X73Y168        LUT5 (Prop_E6LUT_SLICEM_I4_O)
+                                                      0.052    10.035 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__28_i_6/O
+                         net (fo=34, routed)          0.391    10.426    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_3_in[4]
+    SLICE_X69Y164        LUT6 (Prop_E6LUT_SLICEL_I5_O)
+                                                      0.090    10.516 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g2_b3__28/O
+                         net (fo=1, routed)           0.194    10.710    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/g0_b0__37_i_15_2
+    SLICE_X66Y164        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.098    10.808 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__28/g0_b0__37_i_39/O
+                         net (fo=2, routed)           0.096    10.904    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_465
+    SLICE_X66Y164        LUT2 (Prop_E5LUT_SLICEL_I1_O)
+                                                      0.070    10.974 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_42/O
+                         net (fo=4, routed)           0.561    11.535    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_42_n_0
+    SLICE_X63Y166        LUT6 (Prop_H6LUT_SLICEM_I5_O)
+                                                      0.039    11.574 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_16/O
+                         net (fo=5, routed)           0.281    11.855    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__37_i_16_n_0
+    SLICE_X61Y166        LUT3 (Prop_E5LUT_SLICEM_I2_O)
+                                                      0.070    11.925 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_10/O
+                         net (fo=3, routed)           0.262    12.187    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_2_in[43]
+    SLICE_X57Y171        LUT2 (Prop_G6LUT_SLICEM_I1_O)
+                                                      0.037    12.224 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_4/O
+                         net (fo=33, routed)          0.252    12.476    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__33_i_4_n_0
+    SLICE_X57Y175        LUT6 (Prop_A6LUT_SLICEM_I3_O)
+                                                      0.150    12.626 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g1_b5__33/O
+                         net (fo=1, routed)           0.181    12.807    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[21]_i_10_1
+    SLICE_X53Y175        LUT6 (Prop_B6LUT_SLICEM_I3_O)
+                                                      0.052    12.859 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__33/g0_b0__38_i_40/O
+                         net (fo=4, routed)           0.093    12.952    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_337
+    SLICE_X53Y174        LUT6 (Prop_C6LUT_SLICEM_I2_O)
+                                                      0.051    13.003 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_24/O
+                         net (fo=3, routed)           0.152    13.156    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[117]
+    SLICE_X55Y174        LUT3 (Prop_E5LUT_SLICEL_I2_O)
+                                                      0.138    13.294 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_15/O
+                         net (fo=2, routed)           0.121    13.415    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[53]
+    SLICE_X56Y174        LUT2 (Prop_E6LUT_SLICEM_I1_O)
+                                                      0.052    13.467 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b0__38_i_6/O
+                         net (fo=33, routed)          0.543    14.010    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in[21]
+    SLICE_X63Y175        LUT6 (Prop_B6LUT_SLICEM_I5_O)
+                                                      0.089    14.099 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/g0_b5__38/O
+                         net (fo=2, routed)           0.017    14.116    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/ciphertext[93]_i_10_2
+    SLICE_X63Y175        MUXF7 (Prop_F7MUX_AB_SLICEM_I0_O)
+                                                      0.067    14.183 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand/sbox_inferred__38/ciphertext_reg[93]_i_12/O
+                         net (fo=1, routed)           0.227    14.410    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_key_expand_n_443
+    SLICE_X65Y176        LUT6 (Prop_A6LUT_SLICEL_I1_O)
+                                                      0.050    14.460 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[93]_i_10/O
+                         net (fo=2, routed)           0.431    14.891    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[93]_i_10_n_0
+    SLICE_X66Y176        LUT6 (Prop_H6LUT_SLICEL_I1_O)
+                                                      0.051    14.942 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[61]_i_4/O
+                         net (fo=1, routed)           0.037    14.979    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[61]_i_4_n_0
+    SLICE_X66Y176        LUT5 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.089    15.068 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/ciphertext[61]_i_2/O
+                         net (fo=3, routed)           0.046    15.114    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/selected_round_key[61]
+    SLICE_X66Y176        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.050    15.164 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[61]_i_2/O
+                         net (fo=1, routed)           0.088    15.252    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/normal_round_state[61]
+    SLICE_X66Y176        LUT6 (Prop_D6LUT_SLICEL_I4_O)
+                                                      0.050    15.302 r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/u_control/state_reg[61]_i_1/O
+                         net (fo=1, routed)           0.049    15.351    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/p_1_in__0[61]
+    SLICE_X66Y176        FDRE                                         r  aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[61]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_pl_0 rise edge)
+                                                     10.000    10.000 r  
+                         propagated clock network latency
+                                                      1.819    11.819    
+                         clock pessimism              0.160    11.979    
+                         clock uncertainty           -0.130    11.850    
+    SLICE_X66Y176        FDRE (Setup_DFF_SLICEL_C_D)
+                                                      0.025    11.875    aes_system_i/aes_axi_fifo_0/inst/u_aes_fifo_integration/u_aes/state_reg_reg[61]
+  -------------------------------------------------------------------
+                         required time                         11.875    
+                         arrival time                         -15.351    
+  -------------------------------------------------------------------
+                         slack                                 -3.476    
+
+
+
+
