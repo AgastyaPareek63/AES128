@@ -9,22 +9,22 @@ module aes_axi_lite #(
 
     // AXI4-Lite WRITE ADDRESS CHANNEL
 
-    input wire [C_S_AXI_ADDR_WIDTH-1:0] S_AXI_AWADDR,
-    input wire S_AXI_AWVALID,
-    output reg S_AXI_AWREADY,
+    input wire [C_S_AXI_ADDR_WIDTH-1:0] S_AXI_AWADDR,//Address of the register to write
+    input wire S_AXI_AWVALID,//tells if the master is giving a valid address 
+    output reg S_AXI_AWREADY,// tells if salve can accept the address 
 
     // AXI4-Lite WRITE DATA CHANNEL
 
-    input wire [C_S_AXI_DATA_WIDTH-1:0] S_AXI_WDATA,
-    input wire [(C_S_AXI_DATA_WIDTH/8)-1:0] S_AXI_WSTRB,
+    input wire [C_S_AXI_DATA_WIDTH-1:0] S_AXI_WDATA, // 32-bit data being written.
+    input wire [(C_S_AXI_DATA_WIDTH/8)-1:0] S_AXI_WSTRB, // write-strobe signal calculates how many bytes are present on the data bus
     input wire S_AXI_WVALID,
     output reg S_AXI_WREADY,
 
     // AXI4-Lite WRITE RESPONSE CHANNEL
 
-    output reg [1:0] S_AXI_BRESP,
-    output reg S_AXI_BVALID,
-    input wire S_AXI_BREADY,
+    output reg [1:0] S_AXI_BRESP, // indicates the write transaction's result
+    output reg S_AXI_BVALID,// indicates if write response is available
+    input wire S_AXI_BREADY, // indicates that the master is ready to accept the response
 
     // AXI4-Lite READ ADDRESS CHANNEL
 
@@ -34,10 +34,10 @@ module aes_axi_lite #(
 
     // AXI4-Lite READ DATA CHANNEL
 
-    output reg [C_S_AXI_DATA_WIDTH-1:0] S_AXI_RDATA,
-    output reg [1:0] S_AXI_RRESP,
-    output reg S_AXI_RVALID,
-    input wire S_AXI_RREADY,
+    output reg [C_S_AXI_DATA_WIDTH-1:0] S_AXI_RDATA, // carries the 32-bit value returned to software
+    output reg [1:0] S_AXI_RRESP,// indicates the result of the read transaction
+    output reg S_AXI_RVALID, // indicates that the read data is available
+    input wire S_AXI_RREADY, // indicates if master is ready to receive the data
 
     // AES INTERFACE
 
@@ -47,49 +47,31 @@ module aes_axi_lite #(
 );
 
     // REGISTER STORAGE
-
-    // Plaintext:
-    // plaintext_reg[0] = [127:96]
-    // plaintext_reg[1] = [95:64]
-    // plaintext_reg[2] = [63:32]
-    // plaintext_reg[3] = [31:0]
-
+    // 4 X 32 = 128 bits
+    
+    // Plaintext
     reg [31:0] plaintext_reg [0:3];
 
-    // Key:
-    // key_reg[0] = [127:96]
-    // key_reg[1] = [95:64]
-    // key_reg[2] = [63:32]
-    // key_reg[3] = [31:0]
-    //
+    // Key
     reg [31:0] key_reg [0:3];
 
-    // Ciphertext:
-    // ciphertext_reg[0] = [127:96]
-    // ciphertext_reg[1] = [95:64]
-    // ciphertext_reg[2] = [63:32]
-    // ciphertext_reg[3] = [31:0]
-    //
+    // Ciphertext
     reg [31:0] ciphertext_reg [0:3];
 
     // CONTROL / STATUS REGISTERS
 
-    // One-clock AES start pulse
-    reg start_pulse;
+    reg start_pulse;// One-clock AES start pulse
 
-    // Sticky DONE bit
-    reg done_reg;
+    reg done_reg;// Sticky DONE bit
 
     // AXI WRITE HOLDING REGISTERS
 
-    reg [C_S_AXI_ADDR_WIDTH-1:0] awaddr_reg;
+    reg [C_S_AXI_ADDR_WIDTH-1:0] awaddr_reg; // Stores the captured write address
+    reg [C_S_AXI_DATA_WIDTH-1:0] wdata_reg; // Stores the captured write data.
+    reg [(C_S_AXI_DATA_WIDTH/8)-1:0] wstrb_reg; // Stores the byte-enable bits associated with the data
 
-    reg [C_S_AXI_DATA_WIDTH-1:0] wdata_reg;
-
-    reg [(C_S_AXI_DATA_WIDTH/8)-1:0] wstrb_reg;
-
-    reg awaddr_valid;
-    reg wdata_valid;
+    reg awaddr_valid; // write address has been captured
+    reg wdata_valid; // write data has been captured.
 
     // AES CORE SIGNALS
 
@@ -211,7 +193,6 @@ module aes_axi_lite #(
             end
 
             // EXECUTE WRITE
-            //
             // AXI address and AXI data can arrive independently.
             // The write executes only after both are captured.
 
@@ -220,8 +201,7 @@ module aes_axi_lite #(
                 case (awaddr_reg)
 
                     // CONTROL REGISTER
-                    // bit 0x00 = START
-
+                    // 0x00 = START
                     6'h00: begin
 
                         if (wstrb_reg[0] && wdata_reg[0]) begin
@@ -448,11 +428,8 @@ module aes_axi_lite #(
         if (!S_AXI_ARESETN) begin
 
             S_AXI_ARREADY <= 1'b1;
-
             S_AXI_RDATA <= 32'h00000000;
-
             S_AXI_RRESP <= 2'b00;
-
             S_AXI_RVALID <= 1'b0;
 
         end
@@ -463,7 +440,6 @@ module aes_axi_lite #(
             if (S_AXI_RVALID && S_AXI_RREADY) begin
 
                 S_AXI_RVALID <= 1'b0;
-
                 S_AXI_ARREADY <= 1'b1;
 
             end
@@ -475,7 +451,7 @@ module aes_axi_lite #(
                 case (S_AXI_ARADDR)
 
                     // CONTROL
-                    // bit 0x00 = current START pulse
+                    // 0x00 = current START pulse
 
                     6'h00: begin
 
@@ -485,8 +461,8 @@ module aes_axi_lite #(
 
                     // STATUS
                     // 0x04
-                    // bit 0 = BUSY
-                    // bit 1 = DONE
+                    // 0 = BUSY
+                    // 1 = DONE
 
                     6'h04: begin
 

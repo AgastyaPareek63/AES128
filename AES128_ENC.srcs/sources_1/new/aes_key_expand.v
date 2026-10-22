@@ -10,10 +10,7 @@ module aes_key_expand (
     output reg           busy,
     output reg           done
 );
-
-    // =========================================================
     // AES-128 ROUND CONSTANTS
-    // =========================================================
 
     function [7:0] rcon;
         input [3:0] round_num;
@@ -34,9 +31,7 @@ module aes_key_expand (
         end
     endfunction
 
-    // =========================================================
-    // AES S-BOX
-    // =========================================================
+    //S-BOX
 
     function [7:0] sbox;
         input [7:0] in;
@@ -186,14 +181,12 @@ module aes_key_expand (
                 8'hfc:sbox=8'hb0; 8'hfd:sbox=8'h54;
                 8'hfe:sbox=8'hbb; 8'hff:sbox=8'h16;
 
-                default:sbox=8'h00;
+                default:sbox = 8'h00;
             endcase
         end
     endfunction
 
-    // =========================================================
     // AES WORD OPERATIONS
-    // =========================================================
 
     function [31:0] rot_word;
         input [31:0] word;
@@ -214,37 +207,32 @@ module aes_key_expand (
         end
     endfunction
 
-    // =========================================================
-    // SEQUENTIAL AES-128 KEY EXPANSION
-    // =========================================================
+    // SEQUENTIAL AES KEY EXPANSION
 
     reg [31:0] w [0:43];
-    reg [5:0] word_index;
-    integer i;
+    reg [5:0]  word_index;
 
-    localparam IDLE       = 2'd0;
-    localparam CALCULATE  = 2'd1;
+    localparam IDLE = 2'd0;
+    localparam CALCULATE = 2'd1;
     localparam STORE_WORD = 2'd2;
 
     reg [1:0] stage;
     reg [31:0] temp;
-    reg [31:0] generated_word;
+    integer i;
 
     always @(posedge clk) begin
         if (rst) begin
-            round_keys   <= 1408'b0;
-            busy         <= 1'b0;
-            done         <= 1'b0;
-            word_index   <= 6'd0;
-            stage        <= IDLE;
-            temp         <= 32'b0;
-            generated_word <= 32'b0;
+            round_keys <= 1408'b0;
+            busy <= 1'b0;
+            done <= 1'b0;
+            word_index <= 6'd0;
+            stage <= IDLE;
+            temp <= 32'b0;
 
             for (i = 0; i < 44; i = i + 1)
                 w[i] <= 32'b0;
-        end
-        else begin
-            done <= 1'b0;
+        end else begin
+                done <= 1'b0;
 
             case (stage)
 
@@ -258,18 +246,15 @@ module aes_key_expand (
                         round_keys[1407:1280] <= key;
 
                         word_index <= 6'd4;
-                        busy       <= 1'b1;
-                        stage      <= CALCULATE;
+                        busy <= 1'b1;
+                        stage <= CALCULATE;
                     end
                 end
 
                 CALCULATE: begin
-                    if ((word_index % 4) == 0) begin
-                        temp <= sub_word(
-                            rot_word(w[word_index - 6'd1])
-                        ) ^ {rcon(word_index[5:2]), 24'h000000};
-                    end
-                    else begin
+                    if (word_index[1:0] == 2'b00) begin
+                        temp <= sub_word(rot_word(w[word_index - 6'd1])) ^ {rcon(word_index[5:2]), 24'h000000};
+                    end else begin
                         temp <= w[word_index - 6'd1];
                     end
 
@@ -277,16 +262,10 @@ module aes_key_expand (
                 end
 
                 STORE_WORD: begin
-                    generated_word <=
-                        w[word_index - 6'd4] ^ temp;
+                    w[word_index] <= w[word_index - 6'd4] ^ temp;
 
-                    w[word_index] <=
-                        w[word_index - 6'd4] ^ temp;
-
-                    if ((word_index % 4) == 3) begin
-                        round_keys[
-                            1407 - ((word_index / 4) * 128) -: 128
-                        ] <= {
+                    if (word_index[1:0] == 2'b11) begin
+                        round_keys[1407 - ((word_index >> 2) * 128) -: 128] <= {
                             w[word_index - 6'd3],
                             w[word_index - 6'd2],
                             w[word_index - 6'd1],
@@ -295,11 +274,10 @@ module aes_key_expand (
                     end
 
                     if (word_index == 6'd43) begin
-                        busy  <= 1'b0;
-                        done  <= 1'b1;
+                        busy <= 1'b0;
+                        done <= 1'b1;
                         stage <= IDLE;
-                    end
-                    else begin
+                    end else begin
                         word_index <= word_index + 1'b1;
                         stage <= CALCULATE;
                     end
@@ -307,7 +285,7 @@ module aes_key_expand (
 
                 default: begin
                     stage <= IDLE;
-                    busy  <= 1'b0;
+                    busy <= 1'b0;
                 end
 
             endcase

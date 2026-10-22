@@ -92,9 +92,7 @@ module aes128_encrypt (
         .state_out(final_round_state)
     );
 
-    // -------------------------------------------------
     // Encryption FSM
-    // -------------------------------------------------
 
     assign busy = (state != IDLE) && (state != COMPLETE);
 

@@ -245,7 +245,7 @@ module aes_axi_fifo #(
 
                     // CONTROL
                     // 0x00
-                    // bit 0 = START
+                    // 0 = START
 
                     6'h00: begin
 
@@ -449,7 +449,6 @@ module aes_axi_fifo #(
                     if (!fifo_full) begin
 
                         fifo_wr_en <= 1'b1;
-
                         fifo_state <= FIFO_WAIT_DATA;
 
                     end
@@ -475,7 +474,6 @@ module aes_axi_fifo #(
                     if (!fifo_empty) begin
 
                         fifo_rd_en <= 1'b1;
-
                         fifo_state <= FIFO_AES_WAIT;
 
                     end
@@ -500,11 +498,8 @@ module aes_axi_fifo #(
                     if (aes_done) begin
 
                         ciphertext_reg[0] <= aes_ciphertext[127:96];
-
                         ciphertext_reg[1] <= aes_ciphertext[95:64];
-
                         ciphertext_reg[2] <= aes_ciphertext[63:32];
-
                         ciphertext_reg[3] <= aes_ciphertext[31:0];
 
                         done_reg <= 1'b1;
@@ -566,12 +561,12 @@ module aes_axi_fifo #(
                     end
 
                     // STATUS
-                    // bit 0 = AES BUSY
-                    // bit 1 = AES DONE
-                    // bit 2 = FIFO EMPTY
-                    // bit 3 = FIFO FULL
-                    // bit 4 = ECC SINGLE ERROR
-                    // bit 5 = ECC DOUBLE ERROR
+                    // 0 = AES BUSY
+                    // 1 = AES DONE
+                    // 2 = FIFO EMPTY
+                    // 3 = FIFO FULL
+                    // 4 = ECC SINGLE ERROR
+                    // 5 = ECC DOUBLE ERROR
 
                     6'h04: begin
 
@@ -589,48 +584,35 @@ module aes_axi_fifo #(
 
                     // PLAINTEXT
 
-                    6'h10:
-                        S_AXI_RDATA <= plaintext_reg[0];
+                    6'h10: S_AXI_RDATA <= plaintext_reg[0];
 
-                    6'h14:
-                        S_AXI_RDATA <= plaintext_reg[1];
+                    6'h14: S_AXI_RDATA <= plaintext_reg[1];
 
-                    6'h18:
-                        S_AXI_RDATA <= plaintext_reg[2];
+                    6'h18: S_AXI_RDATA <= plaintext_reg[2];
 
-                    6'h1C:
-                        S_AXI_RDATA <= plaintext_reg[3];
+                    6'h1C: S_AXI_RDATA <= plaintext_reg[3];
 
                     // KEY
 
-                    6'h20:
-                        S_AXI_RDATA <= key_reg[0];
+                    6'h20: S_AXI_RDATA <= key_reg[0];
 
-                    6'h24:
-                        S_AXI_RDATA <= key_reg[1];
+                    6'h24: S_AXI_RDATA <= key_reg[1];
 
-                    6'h28:
-                        S_AXI_RDATA <= key_reg[2];
+                    6'h28: S_AXI_RDATA <= key_reg[2];
 
-                    6'h2C:
-                        S_AXI_RDATA <= key_reg[3];
+                    6'h2C: S_AXI_RDATA <= key_reg[3];
 
                     // CIPHERTEXT
 
-                    6'h30:
-                        S_AXI_RDATA <= ciphertext_reg[0];
+                    6'h30: S_AXI_RDATA <= ciphertext_reg[0];
 
-                    6'h34:
-                        S_AXI_RDATA <= ciphertext_reg[1];
+                    6'h34: S_AXI_RDATA <= ciphertext_reg[1];
 
-                    6'h38:
-                        S_AXI_RDATA <= ciphertext_reg[2];
+                    6'h38: S_AXI_RDATA <= ciphertext_reg[2];
 
-                    6'h3C:
-                        S_AXI_RDATA <= ciphertext_reg[3];
+                    6'h3C: S_AXI_RDATA <= ciphertext_reg[3];
 
-                    default:
-                        S_AXI_RDATA <= 32'h00000000;
+                    default: S_AXI_RDATA <= 32'h00000000;
 
                 endcase
 

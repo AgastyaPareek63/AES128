@@ -1,0 +1,188 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Wed Oct 21 13:09:04 2026
+| Host         : AgastyaLegion running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file aes_axi_fifo_control_sets_placed.rpt
+| Design       : aes_axi_fifo
+| Device       : xczu7ev
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |   110 |
+|    Minimum number of control sets                        |   110 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    25 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |   110 |
+| >= 0 to < 4        |     7 |
+| >= 4 to < 6        |     0 |
+| >= 6 to < 8        |     3 |
+| >= 8 to < 10       |    32 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    68 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               2 |            2 |
+| No           | No                    | Yes                    |              41 |            6 |
+| No           | Yes                   | No                     |               8 |            7 |
+| Yes          | No                    | No                     |             137 |           10 |
+| Yes          | No                    | Yes                    |             130 |           41 |
+| Yes          | Yes                   | No                     |            3877 |          911 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-----------------------+---------------------------------------------------------------------------+---------------------------+------------------+----------------+--------------+
+|      Clock Signal     |                               Enable Signal                               |      Set/Reset Signal     | Slice Load Count | Bel Load Count | Bels / Slice |
++-----------------------+---------------------------------------------------------------------------+---------------------------+------------------+----------------+--------------+
+|  S_AXI_ACLK_IBUF_BUFG |                                                                           |                           |                2 |              2 |         1.00 |
+|  S_AXI_ACLK_IBUF_BUFG | S_AXI_AWREADY0                                                            | wdata_valid               |                1 |              2 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_fifo/fwft_inst/state[1]_i_1_n_0                  | S_AXI_ARESETN_IBUF_inst/O |                2 |              2 |         1.00 |
+|  S_AXI_ACLK_IBUF_BUFG | S_AXI_RVALID_i_1_n_0                                                      | S_AXI_ARESETN_IBUF_inst/O |                1 |              2 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | S_AXI_WREADY0                                                             | wdata_valid               |                1 |              2 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/E[0]                            | S_AXI_ARESETN_IBUF_inst/O |                1 |              3 |         3.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/FSM_sequential_stage[1]_i_1_n_0 | S_AXI_ARESETN_IBUF_inst/O |                1 |              3 |         3.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_fifo/fifo_inst/FSM_onehot_fifo_state_reg[0][0]   | S_AXI_ARESETN_IBUF_inst/O |                1 |              6 |         6.00 |
+|  S_AXI_ACLK_IBUF_BUFG | S_AXI_AWREADY0                                                            | S_AXI_ARESETN_IBUF_inst/O |                1 |              6 |         6.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/round_count[0]                               | S_AXI_ARESETN_IBUF_inst/O |                1 |              7 |         7.00 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[2][31]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                4 |              8 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[2][7]_i_1_n_0                                                     | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[2][15]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                5 |              8 |         1.60 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[0][31]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[3][15]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                2 |              8 |         4.00 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[0][23]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                2 |              8 |         4.00 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[0][7]_i_1_n_0                                                     | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[1][23]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                2 |              8 |         4.00 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[1][31]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[1][7]_i_1_n_0                                                     | S_AXI_ARESETN_IBUF_inst/O |                4 |              8 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[2][23]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[3][7]_i_1_n_0                                                     | S_AXI_ARESETN_IBUF_inst/O |                5 |              8 |         1.60 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[3][31]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[3][23]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                2 |              8 |         4.00 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[0][31]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[1][31]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                4 |              8 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[0][15]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                4 |              8 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[1][7]_i_1_n_0                                               | S_AXI_ARESETN_IBUF_inst/O |                5 |              8 |         1.60 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[0][23]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                6 |              8 |         1.33 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[3][23]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                6 |              8 |         1.33 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[3][31]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                4 |              8 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[1][15]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[0][7]_i_1_n_0                                               | S_AXI_ARESETN_IBUF_inst/O |                6 |              8 |         1.33 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[2][23]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                6 |              8 |         1.33 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[2][15]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                3 |              8 |         2.67 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[1][23]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                4 |              8 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[1][15]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                4 |              8 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[2][7]_i_1_n_0                                               | S_AXI_ARESETN_IBUF_inst/O |                6 |              8 |         1.33 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[3][7]_i_1_n_0                                               | S_AXI_ARESETN_IBUF_inst/O |                7 |              8 |         1.14 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[3][15]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                5 |              8 |         1.60 |
+|  S_AXI_ACLK_IBUF_BUFG | key_reg[0][15]_i_1_n_0                                                    | S_AXI_ARESETN_IBUF_inst/O |                2 |              8 |         4.00 |
+|  S_AXI_ACLK_IBUF_BUFG | plaintext_reg[2][31]_i_1_n_0                                              | S_AXI_ARESETN_IBUF_inst/O |                6 |              8 |         1.33 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[42][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               28 |             32 |         1.14 |
+|  S_AXI_ACLK_IBUF_BUFG | S_AXI_ARREADY1                                                            | S_AXI_ARESETN_IBUF_inst/O |               16 |             32 |         2.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[9][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               30 |             32 |         1.07 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[7][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               32 |             32 |         1.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[26][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               30 |             32 |         1.07 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[40][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               30 |             32 |         1.07 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[6][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               32 |             32 |         1.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[43][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               24 |             32 |         1.33 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[41][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               26 |             32 |         1.23 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[5][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[8][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               30 |             32 |         1.07 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[4][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               30 |             32 |         1.07 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/stage__0[1]                     | S_AXI_ARESETN_IBUF_inst/O |               30 |             32 |         1.07 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[37][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               27 |             32 |         1.19 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[11][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               32 |             32 |         1.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[10][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[12][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[13][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               29 |             32 |         1.10 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[0][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               18 |             32 |         1.78 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[27][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[28][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               29 |             32 |         1.10 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[16][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               29 |             32 |         1.10 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[19][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[20][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               29 |             32 |         1.10 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[21][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               32 |             32 |         1.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[18][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               28 |             32 |         1.14 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[15][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               29 |             32 |         1.10 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[22][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[29][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[25][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               29 |             32 |         1.10 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[14][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               28 |             32 |         1.14 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[17][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               30 |             32 |         1.07 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[23][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[1][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               18 |             32 |         1.78 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[24][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[33][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               32 |             32 |         1.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[30][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               27 |             32 |         1.19 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[36][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[32][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               30 |             32 |         1.07 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[35][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[34][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[3][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               17 |             32 |         1.88 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[31][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               31 |             32 |         1.03 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[38][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               32 |             32 |         1.00 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[2][31]_i_1_n_0                | S_AXI_ARESETN_IBUF_inst/O |               17 |             32 |         1.88 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/w[39][31]_i_1_n_0               | S_AXI_ARESETN_IBUF_inst/O |               26 |             32 |         1.23 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/word_index[1]_i_1_n_0           | S_AXI_ARESETN_IBUF_inst/O |                8 |             34 |         4.25 |
+|  S_AXI_ACLK_IBUF_BUFG | S_AXI_WREADY0                                                             | S_AXI_ARESETN_IBUF_inst/O |               28 |             36 |         1.29 |
+|  S_AXI_ACLK_IBUF_BUFG |                                                                           | S_AXI_ARESETN_IBUF_inst/O |               13 |             49 |         3.77 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/ciphertext[127]_i_1_n_0                      | S_AXI_ARESETN_IBUF_inst/O |               59 |            128 |         2.17 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/plaintext_reg[0]                             | S_AXI_ARESETN_IBUF_inst/O |               56 |            128 |         2.29 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/state_reg[0]                                 | S_AXI_ARESETN_IBUF_inst/O |               89 |            128 |         1.44 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_fifo/fwft_inst/E[0]                              | S_AXI_ARESETN_IBUF_inst/O |               44 |            128 |         2.91 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_fifo/fwft_inst/dout[127]_i_1_n_0                 | S_AXI_ARESETN_IBUF_inst/O |               39 |            128 |         3.28 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[1023]_i_1_n_0        | S_AXI_ARESETN_IBUF_inst/O |              110 |            128 |         1.16 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[1151]_i_1_n_0        | S_AXI_ARESETN_IBUF_inst/O |               54 |            128 |         2.37 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[895]_i_1_n_0         | S_AXI_ARESETN_IBUF_inst/O |              102 |            128 |         1.25 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[383]_i_1_n_0         | S_AXI_ARESETN_IBUF_inst/O |               51 |            128 |         2.51 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[1279]_i_1_n_0        | S_AXI_ARESETN_IBUF_inst/O |              109 |            128 |         1.17 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[639]_i_1_n_0         | S_AXI_ARESETN_IBUF_inst/O |              102 |            128 |         1.25 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[767]_i_1_n_0         | S_AXI_ARESETN_IBUF_inst/O |               74 |            128 |         1.73 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[1407]_i_1_n_0        | S_AXI_ARESETN_IBUF_inst/O |               83 |            128 |         1.54 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/FSM_onehot_fifo_state_reg[5][0]              | S_AXI_ARESETN_IBUF_inst/O |               46 |            128 |         2.78 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[255]_i_1_n_0         | S_AXI_ARESETN_IBUF_inst/O |              122 |            128 |         1.05 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[127]_i_1_n_0         | S_AXI_ARESETN_IBUF_inst/O |               85 |            128 |         1.51 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_aes/u_key_expand/round_keys[511]_i_1_n_0         | S_AXI_ARESETN_IBUF_inst/O |               80 |            128 |         1.60 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_fifo/fwft_inst/fifo_rd_en_reg_0[0]               |                           |               10 |            137 |        13.70 |
+|  S_AXI_ACLK_IBUF_BUFG | u_aes_fifo_integration/u_fifo/fifo_inst/mem_inst/wr_bin_next2             |                           |               10 |            160 |        16.00 |
++-----------------------+---------------------------------------------------------------------------+---------------------------+------------------+----------------+--------------+
+
+

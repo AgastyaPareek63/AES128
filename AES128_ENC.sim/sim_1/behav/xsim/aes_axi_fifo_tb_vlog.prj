@@ -1,0 +1,27 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../Users/funag/Downloads/2025.2/Vivado/data/rsb/busdef" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes128_encrypt.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_add_round_keys.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_axi_fifo.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_fifo_integration.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_final_round.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_key_expand.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_mix_columns.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_round.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_sbox.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_shift_rows.v" \
+"../../../../AES128_ENC.srcs/sources_1/new/aes_sub_bytes.v" \
+"../../../../../fifo_ps1/fifo_ps1.srcs/sources_1/new/async_fifo.v" \
+"../../../../../fifo_ps1/fifo_ps1.srcs/sources_1/new/ecc_decoder.v" \
+"../../../../../fifo_ps1/fifo_ps1.srcs/sources_1/new/ecc_encoder.v" \
+"../../../../../fifo_ps1/fifo_ps1.srcs/sources_1/new/fifo_memory.v" \
+"../../../../../fifo_ps1/fifo_ps1.srcs/sources_1/new/fifo_system.v" \
+"../../../../../fifo_ps1/fifo_ps1.srcs/sources_1/new/fwft_wrapper.v" \
+"../../../../../fifo_ps1/fifo_ps1.srcs/sources_1/new/synchronizer.v" \
+"../../../../AES128_ENC.srcs/sim_1/new/aes_axi_fifo_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

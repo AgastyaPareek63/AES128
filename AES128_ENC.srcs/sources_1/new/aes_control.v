@@ -5,15 +5,15 @@ module aes_control (
     input  wire rst,
     input  wire start,
 
-    output reg busy,
+    output reg busy, // Indicates whether the controller is performing an encryption operation
     output reg done,
 
-    output reg initial_add_key,
-    output reg round_enable,
-    output reg final_round_enable,
+    output reg initial_add_key, // initial AddRoundKey operation should be selected
+    output reg round_enable, // normal AES round should be performed
+    output reg final_round_enable, // final AES round should be performed
 
-    output reg [3:0] round_key_sel,
-    output reg [3:0] round
+    output reg [3:0] round_key_sel, // selects AES round key to be used
+    output reg [3:0] round // tracks the round number as the FSM progresses
 );
 
     localparam IDLE = 3'd0;
@@ -71,7 +71,7 @@ module aes_control (
                     end
                     else begin
 
-                        round <= round + 1'b1;
+                        round <= round + 1'b1; // If the counter is not 9, it increments by one
 
                     end
 
@@ -136,9 +136,9 @@ module aes_control (
 
             INITIAL_KEY: begin
 
-                busy = 1'b1;
-                initial_add_key = 1'b1;
-                round_key_sel = 4'd0;
+                busy = 1'b1; // encryption is in progress
+                initial_add_key = 1'b1; // perform the initial AddRoundKey operation
+                round_key_sel = 4'd0; // datapath selects the original AES key (round key 0)
 
             end
 
@@ -146,9 +146,9 @@ module aes_control (
 
             NORMAL_ROUND: begin
 
-                busy = 1'b1;
-                round_enable = 1'b1;
-                round_key_sel = round;
+                busy = 1'b1; // Encryption is still in progress
+                round_enable = 1'b1; // perform a normal AES round.
+                round_key_sel = round; // current round number selects the corresponding round key
 
             end
 
@@ -157,14 +157,14 @@ module aes_control (
             FINAL_ROUND: begin
 
                 busy = 1'b1;
-                final_round_enable = 1'b1;
-                round_key_sel = 4'd10;
+                final_round_enable = 1'b1; // instructed to perform the final round without MixColumns
+                round_key_sel = 4'd10; // select round key 10
 
             end
 
             DONE_STATE: begin
 
-                done = 1'b1;
+                done = 1'b1; // complete
                 busy = 1'b0;
 
             end

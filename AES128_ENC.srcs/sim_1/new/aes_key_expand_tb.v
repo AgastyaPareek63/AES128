@@ -2,179 +2,295 @@
 
 module aes_key_expand_tb;
 
+    // =========================================================
+    // INPUTS
+    // =========================================================
+
+    reg clk;
+    reg rst;
+    reg start;
     reg [127:0] key;
+
+    // =========================================================
+    // OUTPUTS
+    // =========================================================
+
     wire [1407:0] round_keys;
+    wire busy;
+    wire done;
 
     integer errors;
 
+    // =========================================================
+    // DUT: AES-128 KEY EXPANSION
+    // =========================================================
+
     aes_key_expand dut (
+        .clk(clk),
+        .rst(rst),
+        .start(start),
         .key(key),
-        .round_keys(round_keys)
+        .round_keys(round_keys),
+        .busy(busy),
+        .done(done)
     );
+
+    // =========================================================
+    // CLOCK GENERATION: 10 ns PERIOD
+    // =========================================================
+
+    always #5 clk = ~clk;
+
+    // =========================================================
+    // TEST SEQUENCE
+    // =========================================================
 
     initial begin
 
+        clk    = 1'b0;
+        rst    = 1'b1;
+        start  = 1'b0;
+        key    = 128'h000102030405060708090a0b0c0d0e0f;
         errors = 0;
 
+        $display("========================================");
         $display("AES-128 KEY EXPANSION TEST");
-      
-        // Standard AES-128 test key
-        key = 128'h000102030405060708090a0b0c0d0e0f;
+        $display("========================================");
 
-        #10;
+        // Apply reset
+        repeat (2) @(posedge clk);
+        @(negedge clk);
+        rst = 1'b0;
 
-        // Round Key 0
+        // Start key expansion
+        @(negedge clk);
+        start = 1'b1;
 
-        if (round_keys[1407:1280] !== 128'h000102030405060708090a0b0c0d0e0f) begin
+        @(negedge clk);
+        start = 1'b0;
 
-            $display("ERROR: K0");
-            $display("Expected = 000102030405060708090a0b0c0d0e0f");
-            $display("Got = %h", round_keys[1407:1280]);
+        // Wait for the key expansion to finish
+        wait (done === 1'b1);
+        #1;
+
+        // =====================================================
+        // ROUND KEY 0
+        // =====================================================
+
+        if (round_keys[1407:1280] !==
+            128'h000102030405060708090a0b0c0d0e0f) begin
+
+            $display("FAIL: K0");
+            $display("Expected: %032h",
+                     128'h000102030405060708090a0b0c0d0e0f);
+            $display("Got     : %032h", round_keys[1407:1280]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K0");
+        end
 
+        // =====================================================
+        // ROUND KEY 1
+        // =====================================================
 
-        // K1
-        if (round_keys[1279:1152] !== 128'hd6aa74fdd2af72fadaa678f1d6ab76fe) begin
+        if (round_keys[1279:1152] !==
+            128'hd6aa74fdd2af72fadaa678f1d6ab76fe) begin
 
-            $display("ERROR: K1");
-            $display("Expected = d6aa74fdd2af72fadaa678f1d6ab76fe");
-            $display("Got = %h", round_keys[1279:1152]);
+            $display("FAIL: K1");
+            $display("Expected: %032h",
+                     128'hd6aa74fdd2af72fadaa678f1d6ab76fe);
+            $display("Got     : %032h", round_keys[1279:1152]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K1");
+        end
 
+        // =====================================================
+        // ROUND KEY 2
+        // =====================================================
 
-        // K2
-        if (round_keys[1151:1024] !== 128'hb692cf0b643dbdf1be9bc5006830b3fe) begin
+        if (round_keys[1151:1024] !==
+            128'hb692cf0b643dbdf1be9bc5006830b3fe) begin
 
-            $display("ERROR: K2");
-            $display("Expected = b692cf0b643dbdf1be9bc5006830b3fe");
-            $display("Got = %h", round_keys[1151:1024]);
+            $display("FAIL: K2");
+            $display("Expected: %032h",
+                     128'hb692cf0b643dbdf1be9bc5006830b3fe);
+            $display("Got     : %032h", round_keys[1151:1024]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K2");
+        end
 
+        // =====================================================
+        // ROUND KEY 3
+        // =====================================================
 
-        // K3
-        if (round_keys[1023:896] !== 128'hb6ff744ed2c2c9bf6c590cbf0469bf41) begin
+        if (round_keys[1023:896] !==
+            128'hb6ff744ed2c2c9bf6c590cbf0469bf41) begin
 
-            $display("ERROR: K3");
-            $display("Expected = b6ff744ed2c2c9bf6c590cbf0469bf41");
-            $display("Got = %h", round_keys[1023:896]);
+            $display("FAIL: K3");
+            $display("Expected: %032h",
+                     128'hb6ff744ed2c2c9bf6c590cbf0469bf41);
+            $display("Got     : %032h", round_keys[1023:896]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K3");
+        end
 
+        // =====================================================
+        // ROUND KEY 4
+        // =====================================================
 
-        // K4
-        if (round_keys[895:768] !== 128'h47f7f7bc95353e03f96c32bcfd058dfd) begin
+        if (round_keys[895:768] !==
+            128'h47f7f7bc95353e03f96c32bcfd058dfd) begin
 
-            $display("ERROR: K4");
-            $display("Expected = 47f7f7bc95353e03f96c32bcfd058dfd");
-            $display("Got = %h", round_keys[895:768]);
+            $display("FAIL: K4");
+            $display("Expected: %032h",
+                     128'h47f7f7bc95353e03f96c32bcfd058dfd);
+            $display("Got     : %032h", round_keys[895:768]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K4");
+        end
 
+        // =====================================================
+        // ROUND KEY 5
+        // =====================================================
 
-        // K5
-        if (round_keys[767:640] !== 128'h3caaa3e8a99f9deb50f3af57adf622aa) begin
+        if (round_keys[767:640] !==
+            128'h3caaa3e8a99f9deb50f3af57adf622aa) begin
 
-            $display("ERROR: K5");
-            $display("Expected = 3caaa3e8a99f9deb50f3af57adf622aa");
-            $display("Got = %h", round_keys[767:640]);
+            $display("FAIL: K5");
+            $display("Expected: %032h",
+                     128'h3caaa3e8a99f9deb50f3af57adf622aa);
+            $display("Got     : %032h", round_keys[767:640]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K5");
+        end
 
+        // =====================================================
+        // ROUND KEY 6
+        // =====================================================
 
-        // K6
-        if (round_keys[639:512] !== 128'h5e390f7df7a69296a7553dc10aa31f6b) begin
+        if (round_keys[639:512] !==
+            128'h5e390f7df7a69296a7553dc10aa31f6b) begin
 
-            $display("ERROR: K6");
-            $display("Expected = 5e390f7df7a69296a7553dc10aa31f6b");
-            $display("Got = %h", round_keys[639:512]);
+            $display("FAIL: K6");
+            $display("Expected: %032h",
+                     128'h5e390f7df7a69296a7553dc10aa31f6b);
+            $display("Got     : %032h", round_keys[639:512]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K6");
+        end
 
+        // =====================================================
+        // ROUND KEY 7
+        // =====================================================
 
-        // K7
-        if (round_keys[511:384] !== 128'h14f9701ae35fe28c440adf4d4ea9c026) begin
+        if (round_keys[511:384] !==
+            128'h14f9701ae35fe28c440adf4d4ea9c026) begin
 
-            $display("ERROR: K7");
-            $display("Expected = 14f9701ae35fe28c440adf4d4ea9c026");
-            $display("Got = %h", round_keys[511:384]);
+            $display("FAIL: K7");
+            $display("Expected: %032h",
+                     128'h14f9701ae35fe28c440adf4d4ea9c026);
+            $display("Got     : %032h", round_keys[511:384]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K7");
+        end
 
+        // =====================================================
+        // ROUND KEY 8
+        // =====================================================
 
-        // K8
-        if (round_keys[383:256] !== 128'h47438735a41c65b9e016baf4aebf7ad2) begin
+        if (round_keys[383:256] !==
+            128'h47438735a41c65b9e016baf4aebf7ad2) begin
 
-            $display("ERROR: K8");
-            $display("Expected = 47438735a41c65b9e016baf4aebf7ad2");
-            $display("Got = %h", round_keys[383:256]);
+            $display("FAIL: K8");
+            $display("Expected: %032h",
+                     128'h47438735a41c65b9e016baf4aebf7ad2);
+            $display("Got     : %032h", round_keys[383:256]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K8");
+        end
 
+        // =====================================================
+        // ROUND KEY 9
+        // =====================================================
 
-        // K9
-        if (round_keys[255:128] !== 128'h549932d1f08557681093ed9cbe2c974e) begin
+        if (round_keys[255:128] !==
+            128'h549932d1f08557681093ed9cbe2c974e) begin
 
-            $display("ERROR: K9");
-            $display("Expected = 549932d1f08557681093ed9cbe2c974e");
-            $display("Got = %h", round_keys[255:128]);
+            $display("FAIL: K9");
+            $display("Expected: %032h",
+                     128'h549932d1f08557681093ed9cbe2c974e);
+            $display("Got     : %032h", round_keys[255:128]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K9");
+        end
 
+        // =====================================================
+        // ROUND KEY 10
+        // =====================================================
 
-        // K10
-        if (round_keys[127:0] !== 128'h13111d7fe3944a17f307a78b4d2b30c5) begin
+        if (round_keys[127:0] !==
+            128'h13111d7fe3944a17f307a78b4d2b30c5) begin
 
-            $display("ERROR: K10");
-            $display("Expected = 13111d7fe3944a17f307a78b4d2b30c5");
-            $display("Got = %h", round_keys[127:0]);
+            $display("FAIL: K10");
+            $display("Expected: %032h",
+                     128'h13111d7fe3944a17f307a78b4d2b30c5);
+            $display("Got     : %032h", round_keys[127:0]);
             errors = errors + 1;
 
-        end
-        else
+        end else begin
             $display("PASS: K10");
+        end
 
-        // Final result
+        // =====================================================
+        // FINAL RESULT
+        // =====================================================
 
-        if (errors == 0)
+        $display("----------------------------------------");
+
+        if (errors == 0) begin
             $display("ALL KEY EXPANSION TESTS PASSED");
-        else
+        end else begin
             $display("KEY EXPANSION TEST FAILED: %0d errors", errors);
+        end
+
+        $display("----------------------------------------");
+
+        if (busy !== 1'b0) begin
+            $display("ERROR: BUSY did not return to zero");
+            errors = errors + 1;
+        end
 
         $finish;
 
+    end
+
+    // =========================================================
+    // TIMEOUT PROTECTION
+    // =========================================================
+
+    initial begin
+        #10000;
+        $display("ERROR: Simulation timed out");
+        $finish;
     end
 
 endmodule
